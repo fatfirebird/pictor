@@ -1,11 +1,20 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const Editor = () => {
+const Editor = (props) => {
   return (
     <div>
-    1111
+      <button onClick = {()=>{console.log(props.id)}}>
+        123
+      </button>
     </div>
   )
 }
 
-export default Editor
+const mapStateToProps = (state) => {
+  return {
+    id: state.type
+  }
+}
+
+export default connect(mapStateToProps)(Editor)
