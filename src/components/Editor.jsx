@@ -4,9 +4,7 @@ import { connect } from 'react-redux'
 const Editor = (props) => {
   return (
     <div>
-      <button onClick = {()=>{console.log(props.id)}}>
-        123
-      </button>
+    123
     </div>
   )
 }
