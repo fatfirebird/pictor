@@ -2,9 +2,6 @@ import React from 'react'
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 import Editor from './Editor.jsx'
 import Home from './Home.jsx'
-import Auth from './Auth.jsx'
-import User from './User.jsx'
-import NoPath from './NoPath.jsx'
 import { useSelector } from 'react-redux'
 
 export default function App(){
@@ -20,8 +17,8 @@ export default function App(){
           </Switch>
           :
           <Switch>
-            <Route exact path = '/authorization' component = {Auth}/>
-            <Redirect to = '/authorization'/>
+            <Route exact path = '/home' component = {Home}/>
+            <Redirect to = '/home'/>
           </Switch>
         }
     </BrowserRouter>
