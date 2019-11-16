@@ -1,19 +1,11 @@
-const initialState = {
-  status: false
-}
-
-const authorizationReducer = (state = initialState, action) => {
+const authorizationReducer = (state = false, action) => {
   switch (action.type) {
     case 'LOG_IN':
-      return {
-        ...state,
-        status: 'login'
-      };
+      return state = 'login'
     case 'REGISTARTION':
-      return {
-        ...state,
-        status: 'reg'
-      };
+      return state = 'reg'
+    case 'CLOSE':
+      return !state;
     default:
       return state;
   }

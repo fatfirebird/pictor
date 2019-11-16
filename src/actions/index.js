@@ -15,3 +15,9 @@ export const closeModal = () => {
     type: 'MODAL_CLOSE'
   }
 }
+
+export const closeAuth = () => {
+  return {
+    type: 'CLOSE'
+  }
+}
