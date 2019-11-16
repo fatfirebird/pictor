@@ -20,15 +20,20 @@ const Editor = () => {
         </ul>
       </nav>
       <section>
-      png
-      </section>
-      <section>
-        <h3>Фильтры</h3>
-        <Filter />
-        <Filter />
-        <Filter />
-        <Filter />
-        <Filter />
+        <div>
+        png
+        </div>
+        <section>
+          <h3>Фильтры</h3>
+          <Filter />
+          <Filter />
+          <Filter />
+          <Filter />
+          <Filter />
+        </section>
+        <div>
+          123
+        </div>
       </section>
     </main>
   )
