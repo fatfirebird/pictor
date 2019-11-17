@@ -5,20 +5,20 @@ import styled from 'styled-components'
 import Style from '../styles/index.js'
 import { Colors } from '../styles/constants'
 
+const SubmitButton = styled(Style.Buttons.RegButton)`
+  width: 100%;
+  max-width: none;
 
+  margin-bottom: 20px;
+  background-color: ${props => props.auth === 'reg' ? Colors.blue : Colors.purple};
+`
 
 const AuthForm = () => {
   const {Forms, Content, Buttons, Containers} = Style;
+  const {blue, purple} = Colors
+
   const authStatus = useSelector(state => state.authStatus);
   const dispatch = useDispatch();
-
-  const SubmitButton = styled(Buttons.RegButton)`
-    width: 100%;
-    max-width: none;
-
-    margin-bottom: 20px;
-    background-color: ${authStatus === 'reg' ? Colors.blue : Colors.purple};
-  `
 
   return(
     <Containers.AuthContainer>
@@ -39,7 +39,7 @@ const AuthForm = () => {
              <Forms.FormLabel htmlFor = 'password'>Пароль</Forms.FormLabel>
              <Forms.FormInput id = 'password' type = 'password' placeholder = 'Введите пароль' required/>
            </Forms.FormElement>
-            <SubmitButton>Отправить</SubmitButton>
+            <SubmitButton auth = {authStatus}>Отправить</SubmitButton>
             <Buttons.CloseButton onClick = {e => {
               e.preventDefault();
               dispatch(closeAuth())
