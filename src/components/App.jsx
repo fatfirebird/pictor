@@ -1,6 +1,6 @@
 import React from 'react'
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
-import Editor from './Editor.jsx'
+import EditorWrapper from './EditorWrapper.jsx'
 import Home from './Home.jsx'
 import { useSelector } from 'react-redux'
 
@@ -12,7 +12,7 @@ export default function App(){
         {isLoggedIn
           ?
           <Switch>
-            <Route exact path = '/editor' component = {Editor}/>
+            <Route exact path = '/editor' component = {EditorWrapper}/>
             <Redirect to = '/editor'/>
           </Switch>
           :

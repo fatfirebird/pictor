@@ -1,24 +1,12 @@
 import React from 'react'
 import Filter from './Filter.jsx'
-import User from './User.jsx'
+import Navigation from './Navigation.jsx'
+import { MainContainer } from '../styles/containers.js'
 
 const Editor = () => {
   return(
-    <main>
-      <nav>
-        <User />
-        <ul>
-          <li>
-          1
-          </li>
-          <li>
-          2
-          </li>
-          <li>
-          3
-          </li>
-        </ul>
-      </nav>
+    <MainContainer>
+      <Navigation />
       <section>
         <div>
         png
@@ -35,7 +23,7 @@ const Editor = () => {
           123
         </div>
       </section>
-    </main>
+    </MainContainer>
   )
 }
 
