@@ -1,33 +1,55 @@
 import React from 'react'
 import styled from 'styled-components'
-import User from  './User.jsx'
+import User from  '../components/User.jsx'
+import { Link } from '../components/Link.jsx'
+import { ArrowButton } from '../components/buttons.js'
+import { fadeOutLeft, fadeInLeft, Animation } from '../styles/animations.js'
 
-const Nav = styled.nav`
+const Navbar = styled(Animation)`
+  position: absolute;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
-  width: 200px;
+  width: 100vw;
   height: 100vh;
+
+  background-color: #fff;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    margin: 40px 0 0 25px;
+  }
 `
 
 const Navigation = () => {
+  let online = true;
+
   return(
-    <Nav>
+    <Navbar animation = {fadeOutLeft} delay = '3s'>
       <User />
       <ul>
         <li>
-        1
-        </li>
-        <li>
-        2
-        </li>
-        <li>
-        3
+          <Link icon="filledImg">Редактировать изображение</Link>
         </li>
       </ul>
-    </Nav>
+      <ul>
+        <li>
+          <Link icon="question">Справка</Link>
+        </li>
+        <li>
+          <Link icon="exit">Выход</Link>
+        </li>
+      </ul>
+      <ArrowButton onClick={e => {
+        e.preventDefault();
+      }}/>
+    </Navbar>
   )
 }
 

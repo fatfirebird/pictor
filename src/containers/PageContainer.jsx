@@ -31,3 +31,8 @@ export const AuthContainer = styled(ColumnFlex)`
   border-radius: 4px;
   margin: 50px 0;
 `
+export const MainContainer = styled.div`
+  display: grid;
+  grid-template: 4fr 1fr / 1fr; 
+  grid-gap: 0;
+`

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Colors } from '../styles/index.js'
+import arrow from '../content/arrow.svg'
 
 const iconButton = styled.button`
   position: absolute;
@@ -8,7 +9,9 @@ const iconButton = styled.button`
 
   border: 0;
   padding: 0;
+
   background-color: transparent;
+  outline: none;
 `
 
 const button = styled.button`
@@ -35,8 +38,6 @@ export const Button = styled(button)`
 export const CloseButton = styled(iconButton)`
   top: 20px;
   right: 35px;
-
-  outline: none;
 
   &:after {
     content: '';
@@ -72,4 +73,13 @@ export const CloseButton = styled(iconButton)`
   :focus:before {
     background: ${Colors.purple};
   }
+`
+export const ArrowButton = styled(iconButton)`
+  top: 30px;
+  right: 20px;
+
+  width: 35px;
+  height: 35px;
+
+  background: url(${arrow}) no-repeat;
 `

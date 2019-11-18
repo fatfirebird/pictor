@@ -1,3 +1,5 @@
+import { createGlobalStyle } from 'styled-components'
+
 export const Colors = {
   grey: '#939393',
   lightgrey: '#e5e5e5',
@@ -11,3 +13,13 @@ export const Font = {
   fontSize: `14`,
   lineHeight: `18`,
 }
+
+export const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0px;
+
+    color: ${Colors.grey};
+    text-decoration: none;
+    font-family: Roboto, sans-serif;
+  }
+`
