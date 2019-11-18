@@ -1,13 +1,13 @@
-import * as Buttons from './buttons.js'
-import * as Forms from './forms.js'
-import * as Containers from './containers.js'
-import * as Content from './text.js'
-
-const Style = {
-  Buttons,
-  Forms,
-  Containers,
-  Content
+export const Colors = {
+  grey: '#939393',
+  lightgrey: '#e5e5e5',
+  purple: '#A035A3',
+  blue: '#3F51B5'
 }
 
-export default Style
+export const Font = {
+  fontFamily: 'Roboto, sans-serif',
+  fontColor: `${Colors.grey}`,
+  fontSize: `14`,
+  lineHeight: `18`,
+}

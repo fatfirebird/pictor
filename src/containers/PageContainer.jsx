@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Colors } from './constants.js'
+import { Colors } from '../styles/index.js'
 
 const ColumnFlex = styled.div`
   display: flex;
@@ -8,10 +8,16 @@ const ColumnFlex = styled.div`
   align-items: center;
 `
 
-export const MainContainer = styled(ColumnFlex)`
+export const Container1 = styled(ColumnFlex)`
   padding: 0 15px;
 
   background-color: #fff;
+
+  @media (min-width: 768px) {
+    padding: 0 25px;
+  }
+
+
 `
 export const AuthContainer = styled(ColumnFlex)`
   position: relative

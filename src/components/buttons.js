@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Colors } from './constants.js'
+import { Colors } from '../styles/index.js'
 
 const iconButton = styled.button`
   position: absolute;
@@ -26,18 +26,12 @@ const button = styled.button`
   font-size: 14px;
 `
 
-export const AuthButton = styled(button)`
-  width: 133px;
-  margin-left: 30px;
+export const Button = styled(button)`
+  min-width: 133px;
 
-  background-color: ${Colors.purple};
+  background-color: ${props => props.type === 'login' ? Colors.purple : Colors.blue};
 `
 
-export const RegButton = styled(button)`
-  width: 133px;
-
-  background-color: ${Colors.blue};
-`
 export const CloseButton = styled(iconButton)`
   top: 20px;
   right: 35px;
