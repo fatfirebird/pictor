@@ -10,14 +10,28 @@ export const reg = () => {
   }
 }
 
-export const closeModal = () => {
-  return {
-    type: 'MODAL_CLOSE'
-  }
-}
-
 export const closeAuth = () => {
   return {
     type: 'CLOSE'
+  }
+}
+
+export const showModal = modal => {
+  return {
+    type: 'SHOW_MODAL',
+    payload: { modal }
+  }
+}
+
+export const hideModal = modal => {
+  return {
+    type: 'HIDE_MODAL',
+    payload: { modal }
+  }
+}
+
+export const exit = () => {
+  return {
+    type: 'EXIT'
   }
 }

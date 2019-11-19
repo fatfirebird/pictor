@@ -36,8 +36,5 @@ export const fadeInLeft = keyframes`
 `
 
 export const Animation = styled.div`
-  width: 30px;
-  height: 30px;
-  background-color: red;
-  animation: ${props => props.animation} ${props => props.delay} linear;
+  animation: ${props => props.animation} ${props => props.delay} linear forwards;
 `

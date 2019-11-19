@@ -82,4 +82,57 @@ export const ArrowButton = styled(iconButton)`
   height: 35px;
 
   background: url(${arrow}) no-repeat;
+  transform: rotate(180deg);
+`
+
+const circle = styled(iconButton)`
+  top: 30px;
+  left: 20px;
+
+  width: 35px;
+  height: 35px;
+
+  background-color: ${Colors.blue};
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: 0.4s;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+`
+
+export const BurgerButton = styled(circle)`
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: 8.5px;
+    left: 6.5px;
+
+    width: 22px;
+    height 17px;
+
+    background-image: linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 10%,
+      #fff 10%,
+      #fff 28%,
+      transparent 28%,
+      transparent 40%,
+      #fff 40%,
+      #fff 58%,
+      transparent 58%,
+      transparent 70%,
+      #fff 70%,
+      #fff 88%,
+      transparent 88%,
+      transparent 100%
+    )
+  }
+`
+export const DottedButton = styled(circle)`
+  
 `

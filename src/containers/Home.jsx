@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { closeAuth } from '../actions/index.js'
-import { login, reg } from '../actions/index.js'
+import { login, reg, closeAuth } from '../actions/index.js'
 import { Container1, AuthContainer } from './PageContainer.jsx'
 import { Form } from '../components/forms.js'
 import { Button, CloseButton } from '../components/buttons.js'

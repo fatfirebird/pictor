@@ -4,6 +4,8 @@ import User from  '../components/User.jsx'
 import { Link } from '../components/Link.jsx'
 import { ArrowButton } from '../components/buttons.js'
 import { fadeOutLeft, fadeInLeft, Animation } from '../styles/animations.js'
+import { showModal, hideModal, exit } from '../actions/index.js'
+import { useSelector, useDispatch } from 'react-redux'
 
 const Navbar = styled(Animation)`
   position: absolute;
@@ -28,10 +30,12 @@ const Navbar = styled(Animation)`
 `
 
 const Navigation = () => {
-  let online = true;
-
+  const modal = useSelector(state => state.isModalOpened.isOpened);
+  const dispatch = useDispatch();
+  let animation;
+  !modal ? animation = fadeInLeft : animation = fadeOutLeft;
   return(
-    <Navbar animation = {fadeOutLeft} delay = '3s'>
+    <Navbar animation = {animation} delay = '0.4s'>
       <User />
       <ul>
         <li>
@@ -43,11 +47,15 @@ const Navigation = () => {
           <Link icon="question">Справка</Link>
         </li>
         <li>
-          <Link icon="exit">Выход</Link>
+          <Link icon="exit" onClick={e => {
+            e.preventDefault();
+            dispatch(exit())
+          }}>Выход</Link>
         </li>
       </ul>
       <ArrowButton onClick={e => {
         e.preventDefault();
+        modal ? dispatch(hideModal('navbar')) : dispatch(showModal('navbar'))
       }}/>
     </Navbar>
   )
