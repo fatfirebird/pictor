@@ -33,6 +33,16 @@ export const AuthContainer = styled(ColumnFlex)`
 `
 export const MainContainer = styled.div`
   display: grid;
-  grid-template: 4fr 1fr / 1fr; 
+  grid-template: 4fr 1fr / 1fr;
   grid-gap: 0;
+`
+
+export const Side = styled.div`
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100vw;
+  height: 100vh;
 `

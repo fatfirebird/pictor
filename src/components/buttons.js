@@ -4,8 +4,6 @@ import arrow from '../content/arrow.svg'
 
 const iconButton = styled.button`
   position: absolute;
-  top: 0;
-  right: 0;
 
   border: 0;
   padding: 0;
@@ -39,8 +37,10 @@ export const CloseButton = styled(iconButton)`
   top: 20px;
   right: 35px;
 
-  &:after {
+  &::after,
+  &::before {
     content: '';
+
     position: absolute;
     top: 0px;
     left: 0px;
@@ -48,23 +48,17 @@ export const CloseButton = styled(iconButton)`
     width: 30px;
     height: 3px;
 
-    background-color: ${Colors.blue};
-    transform: rotate(45deg);
     border-radius: 4px;
+
+    background-color: ${Colors.blue};
   }
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0px;
-    left: 0px;
+  &::after {
+    transform: rotate(45deg);
+  }
 
-    width: 30px;
-    height: 3px;
-
-    background-color: ${Colors.blue};
+  &::before {
     transform: rotate(-45deg);
-    border-radius: 4px;
   }
 
   :hover:after,
@@ -86,9 +80,6 @@ export const ArrowButton = styled(iconButton)`
 `
 
 const circle = styled(iconButton)`
-  top: 30px;
-  left: 20px;
-
   width: 35px;
   height: 35px;
 
@@ -104,6 +95,10 @@ const circle = styled(iconButton)`
 `
 
 export const BurgerButton = styled(circle)`
+  top: 30px;
+  left: 20px;
+
+
   &::before {
     content: '';
 
@@ -134,5 +129,19 @@ export const BurgerButton = styled(circle)`
   }
 `
 export const DottedButton = styled(circle)`
-  
+  position: absolute;
+
+  top: 30px;
+  right: 20px;
+
+  &::before {
+    content: '•••';
+
+    position: absolute;
+    top: 3px;
+    left: 5px;
+
+    font-size: 24px;
+    color: white;
+  }
 `
