@@ -104,7 +104,7 @@ export const BurgerButton = styled(circle)`
 
     position: absolute;
     top: 8.5px;
-    left: 6.5px;
+    left: 6.47px;
 
     width: 22px;
     height 17px;
@@ -138,8 +138,8 @@ export const DottedButton = styled(circle)`
     content: '•••';
 
     position: absolute;
-    top: 3px;
-    left: 5px;
+    top: 1px;
+    left: 3px;
 
     font-size: 24px;
     color: white;

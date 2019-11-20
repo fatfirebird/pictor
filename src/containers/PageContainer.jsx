@@ -16,8 +16,6 @@ export const Container1 = styled(ColumnFlex)`
   @media (min-width: 768px) {
     padding: 0 25px;
   }
-
-
 `
 export const AuthContainer = styled(ColumnFlex)`
   position: relative
@@ -33,7 +31,7 @@ export const AuthContainer = styled(ColumnFlex)`
 `
 export const MainContainer = styled.div`
   display: grid;
-  grid-template: 4fr 1fr / 1fr;
+  grid-template: 300px 300px / 100vw;
   grid-gap: 0;
 `
 
