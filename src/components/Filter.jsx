@@ -19,7 +19,6 @@ const Filter = () => {
     <FilterWrapper>
       <Label>Фильтрнейм</Label>
       <input type = 'range' min = '0' max = '1' step = '0.1' defaultValue = '0'/>
-
     </FilterWrapper>
   )
 }

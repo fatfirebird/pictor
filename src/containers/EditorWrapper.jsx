@@ -6,8 +6,9 @@ import { showModal } from '../actions/index.js'
 import { BurgerButton, DottedButton } from '../components/buttons.js'
 import SideMenu from './SideMenu.jsx'
 import styled from 'styled-components'
-import cat from '../content/cat.jpg'
-import Filter from '../components/Filter.jsx'
+import Filters from './Filters.jsx'
+import ImageContainer from './ImageContainer.jsx'
+import Preset from '../components/Preset.jsx'
 
 const EditingContainer = styled(Container1)`
   display: block;
@@ -24,29 +25,18 @@ const Editor = () => {
 
   return(
     <MainContainer>
-    <div>
-      <BurgerButton onClick = {e => {
-        e.preventDefault();
-        dispatch(showModal('navbar'))
-      }}/>
-      <DottedButton onClick = {e =>{
-        e.preventDefault();
-        dispatch(showModal('sideMenu'))
-      }}/>
-      <div>
-        <img src = {`${cat}`} width = '100%' height = '100%' alt = 'cat'/>
-      </div>
-    </div>
+    <BurgerButton onClick = {e => {
+      e.preventDefault();
+      dispatch(showModal('navbar'))
+    }}/>
+    <DottedButton onClick = {e =>{
+      e.preventDefault();
+      dispatch(showModal('sideMenu'))
+    }}/>
+    <ImageContainer/>
     <EditingContainer>
-      <Filter/>
-      <Filter/>
-      <Filter/>
-      <Filter/>
-      <Filter/>      <Filter/>
-      <Filter/>
-      <Filter/>
-      <Filter/>
-
+      <Preset/>
+      <Filters/>
     </EditingContainer>
     {modalName === 'navbar' &&
       <Navigation/>

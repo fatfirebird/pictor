@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Colors } from '../styles/index.js'
 
-const ColumnFlex = styled.div`
+export const ColumnFlex = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,8 +31,12 @@ export const AuthContainer = styled(ColumnFlex)`
 `
 export const MainContainer = styled.div`
   display: grid;
-  grid-template: 300px 300px / 100vw;
+  grid-template: 400px calc(100vh - 400px) / 100vw;
   grid-gap: 0;
+
+  @media (min-width: 768px) {
+    grid-template: 550px calc(100vh - 550px) / 100vw;
+  }
 `
 
 export const Side = styled.div`

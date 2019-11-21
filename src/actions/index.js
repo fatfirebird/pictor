@@ -35,3 +35,27 @@ export const exit = () => {
     type: 'EXIT'
   }
 }
+
+export const loadImg = () => {
+  return {
+    type: 'LOADED'
+  }
+}
+
+export const openMenu = menu => {
+  return {
+    type: 'OPEN_MENU',
+    payload: {
+      menu
+    }
+  }
+}
+
+export const closeMenu = menu => {
+  return {
+    type: 'CLOSE_MENU',
+    payload: {
+      menu
+    }
+  }
+}
