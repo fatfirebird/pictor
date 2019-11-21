@@ -1,7 +1,10 @@
 const initialState = {
+  modal: {
+    isOpened: false,
+    modalName: null,
+  },
   menu: {
-    menuName: null,
-    opened: true,
+    menuName: 'filters'
   }
 }
 
@@ -11,21 +14,36 @@ const menuReducer = (state = initialState, action) => {
       const { menuName } = action.payload;
       return {
         ...state,
-        menuName: menuName,
-        opened: true,
+        modal: {
+          isOpened: false,
+        },
+        menu: {
+          menuName: menuName
+        }
       }
     }
-
-    case 'CLOSE_MENU': {
-      const { menuName } = action.payload;
+    case 'SHOW_MODAL': {
+      const { modal } = action.payload;
       return {
         ...state,
-        menuName: menuName,
-        opened: false,
-      }
+        modal: {
+          isOpened: true,
+          modalName: modal
+        }
+      };
+    }
+    case 'HIDE_MODAL': {
+      const { modal } = action.payload;
+      return {
+        ...state,
+        modal: {
+          isOpened: false,
+          modalName: modal
+        }
+      };
     }
     default:
-      return state
+      return state;
   }
 }
 

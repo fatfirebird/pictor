@@ -3,8 +3,9 @@ import { Side } from './PageContainer'
 import styled from 'styled-components'
 import { Link as link }  from '../components/Link.jsx'
 import { CloseButton as closeButton } from '../components/buttons.js'
-import { useDispatch } from 'react-redux'
-import { hideModal } from '../actions/index.js'
+import { useSelector, useDispatch } from 'react-redux'
+import { hideModal, openMenu } from '../actions/index.js'
+import {  } from '../'
 
 const Menu = styled(Side)`
   background-color: rgba(0, 0, 0, 0.85);
@@ -51,13 +52,13 @@ const CloseButton = styled(closeButton)`
   &:focus::before {
     background-color: #fff
   }
-
 `
 
-
 const SideMenu = () => {
+  const menuReducer = useSelector(state => state.menuReducer.menu);
+  const {menuName}  = menuReducer
   const dispatch = useDispatch();
-
+  console.log(menuName);
   return(
     <Menu>
       <ul>
@@ -68,7 +69,20 @@ const SideMenu = () => {
           <Link>Отменить изменения</Link>
         </li>
         <li>
-          <Link>Готовые пресеты</Link>
+        {
+          menuName === 'filters'
+          &&
+          <Link onClick={e => {
+            e.preventDefault()
+            dispatch(openMenu('presets'))
+          }}>Готовые пресеты</Link>
+        }
+        { menuName === 'presets' &&
+          <Link onClick={e => {
+            e.preventDefault()
+            dispatch(openMenu('filters'))
+          }}>Фильтры</Link>
+        }
         </li>
         <li>
           <Link>Ввод текста</Link>

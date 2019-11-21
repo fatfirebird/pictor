@@ -42,20 +42,9 @@ export const loadImg = () => {
   }
 }
 
-export const openMenu = menu => {
+export const openMenu = menuName => {
   return {
     type: 'OPEN_MENU',
-    payload: {
-      menu
-    }
-  }
-}
-
-export const closeMenu = menu => {
-  return {
-    type: 'CLOSE_MENU',
-    payload: {
-      menu
-    }
+    payload: { menuName }
   }
 }

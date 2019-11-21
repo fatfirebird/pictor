@@ -19,8 +19,9 @@ const EditingContainer = styled(Container1)`
 `
 
 const Editor = () => {
-  const isModalOpened = useSelector(state => state.isModalOpened);
-  const {isOpened, modalName} = isModalOpened
+  const menuReducer = useSelector(state => state.menuReducer);
+  const {isOpened, modalName} = menuReducer.modal;
+  const {menuName} = menuReducer.menu;
   const dispatch = useDispatch();
 
   return(
@@ -35,8 +36,14 @@ const Editor = () => {
     }}/>
     <ImageContainer/>
     <EditingContainer>
-      <Preset/>
+    {menuName === 'filters'
+      &&
       <Filters/>
+    }
+    {menuName === 'presets'
+    &&
+    <Preset/>
+    }
     </EditingContainer>
     {modalName === 'navbar' &&
       <Navigation/>

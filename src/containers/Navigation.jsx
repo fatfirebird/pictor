@@ -30,10 +30,11 @@ const Navbar = styled(Animation)`
 `
 
 const Navigation = () => {
-  const modal = useSelector(state => state.isModalOpened.isOpened);
+  const modal = useSelector(state => state.menuReducer.modal);
+  const isModalOpened = modal.isOpened;
   const dispatch = useDispatch();
   let animation;
-  !modal ? animation = fadeInLeft : animation = fadeOutLeft;
+  !isModalOpened ? animation = fadeInLeft : animation = fadeOutLeft;
   return(
     <Navbar animation = {animation} delay = '0.4s'>
       <User />
@@ -55,7 +56,7 @@ const Navigation = () => {
       </ul>
       <ArrowButton onClick={e => {
         e.preventDefault();
-        modal ? dispatch(hideModal('navbar')) : dispatch(showModal('navbar'))
+        isModalOpened ? dispatch(hideModal('navbar')) : dispatch(showModal('navbar'))
       }}/>
     </Navbar>
   )
