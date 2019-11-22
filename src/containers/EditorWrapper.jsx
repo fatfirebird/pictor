@@ -14,6 +14,8 @@ const EditingContainer = styled(Container1)`
   display: block;
   text-align: center;
 
+  margin-top: 25px;
+
   overflow: hidden;
   overflow-y: scroll;
 `

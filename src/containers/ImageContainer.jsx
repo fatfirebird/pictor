@@ -12,6 +12,8 @@ const ImageWrapper = styled(ColumnFlex)`
 
   text-align: center;
 
+  background-color: #080715f2;
+
   p {
     margin: 20px 0 0 0;
     padding: 0 50px;
@@ -26,6 +28,16 @@ const Label = styled.label`
   }
 `
 
+const UploadedImg = styled.img`
+  max-width: 300px;
+  max-height: 300px;
+
+  @media (min-width: 768px) {
+    max-width: 500px;
+    max-height: 500px;
+  }
+`
+
 const ImageContainer = () => {
   const isImgLoaded = useSelector(state => state.isImgLoaded);
   const { isLoaded, file, url } = isImgLoaded
@@ -35,12 +47,14 @@ const ImageContainer = () => {
   const handleUpload = () => {
     const file = fileRef.current.files[0];
     dispatch(loadImg())
-    return readFile(file)
+    if (file) {
+      console.log(file);
+      return readFile(file)
+    }
   }
 
   const readFile = (file) => {
     const reader = new FileReader();
-    console.log(file);
     reader.readAsDataURL(file)
     reader.onload = () => {
       dispatch(imgData(file, reader.result))
@@ -48,20 +62,25 @@ const ImageContainer = () => {
   }
 
   return(
-    <div>
-      {!isLoaded
-       ?
-       <ImageWrapper>
+      <ImageWrapper>
        <Label>
-        <img src = {`${LoadPic}`} width='50%' height='50%' alt='rfs'/>
-        <p>Нажмите здесь, чтобы загрузить изображение в формате jpeg или png</p>
-        <input type = 'file' ref = {fileRef} accept = '.jpg, .jpeg, .png' onChange = {handleUpload}/>
+         {!isLoaded
+           ?
+           <div>
+            <img src = {`${LoadPic}`} width='50%' height='50%' alt='rfs'/>
+            <p>Нажмите здесь, чтобы загрузить изображение в формате jpeg или png</p>
+           </div>
+           :
+            <UploadedImg src = {url}/>
+          }
+        <input
+          type = 'file'
+          ref = {fileRef}
+          accept = '.jpg, .jpeg, .png'
+          onChange = {handleUpload}
+        />
        </Label>
-       </ImageWrapper>
-       :
-       <img src = {url} width = '100%' height = '100%'/>
-      }
-    </div>
+      </ImageWrapper>
   )
 }
 
