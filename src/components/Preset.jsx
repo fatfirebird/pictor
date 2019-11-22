@@ -20,6 +20,11 @@ const PresetContainer = styled.div`
   grid-template-rows: repeat(4, 150px);
   justify-content: center;
   grid-gap: 25px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 150px);
+    grid-template-rows: repeat(2, 150px)
+  }
 `
 
 const PresetName = styled.span`
@@ -39,7 +44,7 @@ const Preset = () => {
   return(
     <PresetContainer>
       <PresetWrapper>
-        <PresetName>Хуй</PresetName>
+        <PresetName>будешь?</PresetName>
         <img src={cat} width='100%' height='100%' alt='cat'/>
       </PresetWrapper>
       <PresetWrapper>

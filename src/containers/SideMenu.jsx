@@ -58,7 +58,6 @@ const SideMenu = () => {
   const menuReducer = useSelector(state => state.menuReducer.menu);
   const {menuName}  = menuReducer
   const dispatch = useDispatch();
-  console.log(menuName);
   return(
     <Menu>
       <ul>

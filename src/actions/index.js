@@ -42,6 +42,13 @@ export const loadImg = () => {
   }
 }
 
+export const imgData = (file, url) => {
+  return {
+    type: 'IMG_DATA',
+    payload: { file, url }
+  }
+}
+
 export const openMenu = menuName => {
   return {
     type: 'OPEN_MENU',
