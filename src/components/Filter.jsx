@@ -16,6 +16,17 @@ const Label = styled.label`
   margin-bottom: 15px;
 `
 
+const thumb = `
+  width: 25px;
+  height: 25px;
+
+  border: 4px solid #3F51B5;
+  border-radius: 50%;
+
+  background: #3F51B5;
+  cursor: pointer;
+`
+
 const Range = styled.input`
   & {
     -webkit-appearance: none;
@@ -34,36 +45,24 @@ const Range = styled.input`
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
 
-    width: 25px;
-    height: 25px;
-
-    border: 4px solid #3F51B5;
-    border-radius: 50%;
-
-    background: #3F51B5;
-    cursor: pointer;
+    ${thumb}
   }
 
   &::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-
-    border: 4px solid #3F51B5;
-    border-radius: 50%;
-
-    background: #3F51B5;
-    cursor: pointer;
+    ${thumb}
   }
 `
 
 const Filter = props => {
   const filter = useSelector(state => state.filters[props.id]);
-  const { name, value, id } = filter
   const rangeRef = useRef(null);
   const dispatch = useDispatch();
 
+  const { name, value, id } = filter
+
   useEffect(() => {
     setBackground(value)
+    setResetValue(value)
   })
 
   const handleChange = () => {
@@ -71,7 +70,11 @@ const Filter = props => {
      dispatch(changeFilterValue(name, refValue, id))
    }
 
-  const setBackground = (value) => {
+   const setResetValue = value => {
+     rangeRef.current.value = value
+   }
+
+  const setBackground = value => {
     return `linear-gradient(90deg, #3F51B5 ${value * 100}%, #939393 ${value * 100}%)`
   }
 

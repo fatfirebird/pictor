@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components'
 export const Fade = keyframes`
 from {
   display: none;
-  left: -1000px;
+  left: -10000px;
  }
 
  to {
@@ -14,7 +14,7 @@ from {
 export const fadeOutLeft = keyframes`
   from {
     display: none;
-    left: -1000px;
+    left: -3000px;
    }
 
    to {
@@ -31,7 +31,7 @@ export const fadeInLeft = keyframes`
 
   to {
     display: none;
-    left: -1000px;
+    left: -3000px;
    }
 `
 

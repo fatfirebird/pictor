@@ -10,19 +10,22 @@ const initialState = {
 
 const filtersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'CHANGE_VALUE':
-    const { filterName, filterValue, filterId } = action.payload;
+    case 'CHANGE_VALUE': {
+      const { filterName, filterValue, filterId } = action.payload;
 
-    const key = Object.keys(state).find(id => id == filterId);
+      const key = Object.keys(state).find(id => id == filterId);
 
-    return {
-      ...state,
-      [key]: {
-        name: filterName,
-        value: filterValue,
-        id: filterId,
+      return {
+        ...state,
+        [key]: {
+          name: filterName,
+          value: filterValue,
+          id: filterId,
+        }
       }
     }
+    case 'RESET' :
+      return initialState
     default:
       return state;
   }

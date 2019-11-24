@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import { Link as link }  from '../components/Link.jsx'
 import { CloseButton as closeButton } from '../components/buttons.js'
 import { useSelector, useDispatch } from 'react-redux'
-import { hideModal, openMenu } from '../actions/index.js'
-import {  } from '../'
+import { hideModal, openMenu, resetFilters } from '../actions/index.js'
 
 const Menu = styled(Side)`
   background-color: rgba(0, 0, 0, 0.85);
@@ -58,6 +57,7 @@ const SideMenu = () => {
   const menuReducer = useSelector(state => state.menuReducer.menu);
   const {menuName}  = menuReducer
   const dispatch = useDispatch();
+
   return(
     <Menu>
       <ul>
@@ -87,7 +87,10 @@ const SideMenu = () => {
           <Link>Ввод текста</Link>
         </li>
         <li>
-          <Link>Сбросить фильтры</Link>
+          <Link onClick={e => {
+            e.preventDefault()
+            dispatch(resetFilters())
+          }} >Сбросить фильтры</Link>
         </li>
       </ul>
       <CloseButton onClick={e => {
