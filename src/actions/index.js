@@ -55,3 +55,14 @@ export const openMenu = menuName => {
     payload: { menuName }
   }
 }
+
+export const changeFilterValue = (filterName, filterValue, filterId) => {
+  return {
+    type: 'CHANGE_VALUE',
+    payload: {
+      filterName,
+      filterValue,
+      filterId,
+    }
+  }
+}

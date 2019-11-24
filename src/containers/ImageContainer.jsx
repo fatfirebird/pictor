@@ -48,7 +48,6 @@ const ImageContainer = () => {
     const file = fileRef.current.files[0];
     dispatch(loadImg())
     if (file) {
-      console.log(file);
       return readFile(file)
     }
   }
