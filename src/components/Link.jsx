@@ -14,26 +14,16 @@ export const Link = styled.a`
 
   cursor: pointer;
 
-  &:hover,
-  &:focus {
-    color: ${Colors.purple};
-  }
-
   &::before {
     content: '';
 
     position: absolute;
     left: 0;
-    top: 0;
+    top: -5px;
 
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     background: url(${props => chooseIcon(props.icon)}) no-repeat;
-  }
-
-  &:hover::before,
-  &:focus::before {
-    fill: ${Colors.purple}
   }
 `
 const chooseIcon = (icon) => {

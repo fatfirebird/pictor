@@ -29,7 +29,7 @@ const Navbar = styled(Animation)`
   }
 
   @media (min-width: 1024px) {
-    width: 20vw;
+    width: 350px;
   }
 `
 
