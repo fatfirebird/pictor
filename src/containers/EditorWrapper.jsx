@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import Filters from './Filters.jsx'
 import ImageContainer from './ImageContainer.jsx'
 import Preset from '../components/Preset.jsx'
+import Info from './Info.jsx'
 
 const EditingContainer = styled(Container1)`
   display: block;
@@ -59,6 +60,9 @@ const Editor = () => {
         }
         {modalName === 'sideMenu' && isOpened &&
           <SideMenu/>
+        }
+        {modalName === 'help' &&
+          <Info/>
         }
       </React.Fragment>
     </MainContainer>

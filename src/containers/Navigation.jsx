@@ -5,7 +5,7 @@ import { Link } from '../components/Link.jsx'
 import { ArrowButton } from '../components/buttons.js'
 import { fadeOutLeft, fadeInLeft, Animation } from '../styles/animations.js'
 import { showModal, hideModal, exit } from '../actions/index.js'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, batch } from 'react-redux'
 
 const Navbar = styled(Animation)`
   position: absolute;
@@ -54,7 +54,13 @@ const Navigation = () => {
       </ul>
       <ul>
         <li>
-          <Link icon="question">Справка</Link>
+          <Link icon="question" onClick={e => {
+            e.preventDefault()
+            batch(() => {
+              dispatch(hideModal('navbar'))
+              dispatch(showModal('help'))
+            })
+          }}>Справка</Link>
         </li>
         <li>
           <Link icon="exit" onClick={e => {
