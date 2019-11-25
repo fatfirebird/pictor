@@ -16,6 +16,10 @@ export const Container1 = styled(ColumnFlex)`
   @media (min-width: 768px) {
     padding: 0 25px;
   }
+
+  @media (min-width: 1024px) {
+    padding: 0 35px;
+  }
 `
 export const AuthContainer = styled(ColumnFlex)`
   position: relative
@@ -36,6 +40,17 @@ export const MainContainer = styled.div`
 
   @media (min-width: 768px) {
     grid-template: 550px calc(100vh - 550px) / 100vw;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(5, 20vh);
+    grid-template-areas:
+      'pic pic pic pic pic pic pic pic'
+      'pic pic pic pic pic pic pic pic'
+      'pic pic pic pic pic pic pic pic'
+      'ed ed ed ed ed ed ed ed'
+      'ed ed ed ed ed ed ed ed'
   }
 `
 

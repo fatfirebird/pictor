@@ -3,7 +3,7 @@ import { Side } from './PageContainer'
 import styled from 'styled-components'
 import { Link as link }  from '../components/Link.jsx'
 import { CloseButton as closeButton } from '../components/buttons.js'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, batch } from 'react-redux'
 import { hideModal, openMenu, resetFilters } from '../actions/index.js'
 
 const Menu = styled(Side)`
@@ -89,7 +89,10 @@ const SideMenu = () => {
         <li>
           <Link onClick={e => {
             e.preventDefault()
-            dispatch(resetFilters())
+            batch(() => {
+              dispatch(resetFilters())
+              dispatch(openMenu(menuName))
+            })
           }} >Сбросить фильтры</Link>
         </li>
       </ul>

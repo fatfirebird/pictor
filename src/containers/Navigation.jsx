@@ -27,16 +27,25 @@ const Navbar = styled(Animation)`
   li {
     margin: 40px 0 0 25px;
   }
+
+  @media (min-width: 1024px) {
+    width: 20vw;
+  }
 `
 
 const Navigation = () => {
   const modal = useSelector(state => state.menuReducer.modal);
   const isModalOpened = modal.isOpened;
   const dispatch = useDispatch();
-  let animation;
-  !isModalOpened ? animation = fadeInLeft : animation = fadeOutLeft;
+
+  const createAnimation = () => {
+    let animation;
+    !isModalOpened ? animation = fadeInLeft : animation = fadeOutLeft;
+    return animation
+  }
+
   return(
-    <Navbar animation = {animation} delay = '0.4s'>
+    <Navbar animation = {createAnimation()} delay = '0.4s'>
       <User />
       <ul>
         <li>

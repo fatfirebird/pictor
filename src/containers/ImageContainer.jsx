@@ -18,6 +18,10 @@ const ImageWrapper = styled(ColumnFlex)`
     margin: 20px 0 0 0;
     padding: 0 50px;
   }
+
+  @media (min-width: 1024px) {
+    grid-area: pic;
+  }
 `
 
 const Label = styled.label`

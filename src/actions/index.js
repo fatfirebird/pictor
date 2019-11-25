@@ -69,6 +69,6 @@ export const changeFilterValue = (filterName, filterValue, filterId) => {
 
 export const resetFilters = () => {
   return {
-    type: 'RESET'
+    type: 'RESET',
   }
 }

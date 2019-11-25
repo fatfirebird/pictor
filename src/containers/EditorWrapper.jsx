@@ -18,6 +18,10 @@ const EditingContainer = styled(Container1)`
 
   overflow: hidden;
   overflow-y: scroll;
+
+  @media (min-width: 1024px) {
+    grid-area: ed;
+  }
 `
 
 const Editor = () => {
@@ -28,31 +32,35 @@ const Editor = () => {
 
   return(
     <MainContainer>
-    <BurgerButton onClick = {e => {
-      e.preventDefault();
-      dispatch(showModal('navbar'))
-    }}/>
-    <DottedButton onClick = {e =>{
-      e.preventDefault();
-      dispatch(showModal('sideMenu'))
-    }}/>
-    <ImageContainer/>
-    <EditingContainer>
-    {menuName === 'filters'
-      &&
-      <Filters/>
-    }
-    {menuName === 'presets'
-    &&
-    <Preset/>
-    }
-    </EditingContainer>
-    {modalName === 'navbar' &&
-      <Navigation/>
-    }
-    {modalName === 'sideMenu' && isOpened &&
-      <SideMenu/>
-    }
+      <React.Fragment>
+        <BurgerButton onClick = {e => {
+          e.preventDefault();
+          dispatch(showModal('navbar'))
+        }}/>
+        <DottedButton onClick = {e =>{
+          e.preventDefault();
+          dispatch(showModal('sideMenu'))
+        }}/>
+      </React.Fragment>
+      <ImageContainer/>
+      <EditingContainer>
+        {menuName === 'filters'
+        &&
+        <Filters/>
+        }
+        {menuName === 'presets'
+        &&
+        <Preset/>
+        }
+      </EditingContainer>
+      <React.Fragment>
+        {modalName === 'navbar' &&
+          <Navigation/>
+        }
+        {modalName === 'sideMenu' && isOpened &&
+          <SideMenu/>
+        }
+      </React.Fragment>
     </MainContainer>
   )
 }
