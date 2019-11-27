@@ -16,7 +16,11 @@ const Home = () => {
   const authStatus = useSelector(state => state.authStatus);
   const dispatch = useDispatch()
 
-  const [userInfo, setUserInfo] = useState( {email: null, login: null, password: null} );
+  const [userInfo, setUserInfo] = useState({
+    email: null,
+    login: null,
+    password: null
+  });
 
   const handleChange = target => {
     const { value, id } = target;
@@ -24,11 +28,22 @@ const Home = () => {
     return setUserInfo(state => ({
       ...state,
       [id]: value,
-    }))
+    }));
   }
 
   const handleSubmit = () => {
-    return null
+    const url = 'http://localhost:8000/users';
+    const {email, login, password} = userInfo;
+    console.log(userInfo);
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userInfo)
+    })
+    .then(res => res.json())
+    .then(res => {console.log(res)})
   }
 
   return(
@@ -58,7 +73,10 @@ const Home = () => {
       <AuthContainer>
         <h2>{authStatus === 'reg' ? 'Регистрация' : 'Авторизация'}</h2>
         {authStatus &&
-         <Form>
+         <Form onSubmit = {(e) => {
+           e.preventDefault()
+           handleSubmit()
+         }}>
              {authStatus === 'reg' &&
              <div>
                <label htmlFor = 'email'>E-mail</label>
