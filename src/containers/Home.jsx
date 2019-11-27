@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { login, reg, closeAuth } from '../actions/index.js'
 import { Container1, AuthContainer } from './PageContainer.jsx'
@@ -15,6 +15,21 @@ const ButtonContainer = styled.div`
 const Home = () => {
   const authStatus = useSelector(state => state.authStatus);
   const dispatch = useDispatch()
+
+  const [userInfo, setUserInfo] = useState( {email: null, login: null, password: null} );
+
+  const handleChange = target => {
+    const { value, id } = target;
+
+    return setUserInfo(state => ({
+      ...state,
+      [id]: value,
+    }))
+  }
+
+  const handleSubmit = () => {
+    return null
+  }
 
   return(
     <Container1>
@@ -47,16 +62,34 @@ const Home = () => {
              {authStatus === 'reg' &&
              <div>
                <label htmlFor = 'email'>E-mail</label>
-               <input id = 'email' type = 'email' placeholder = 'Введите email' required/>
+               <input
+                id = 'email'
+                type = 'email'
+                placeholder = 'Введите email'
+                onChange = {e => handleChange(e.target)}
+                required
+               />
              </div>
              }
              <div>
                <label htmlFor = 'login'>Логин</label>
-               <input id = 'login' type = 'text' placeholder = 'Введите логин' required/>
+               <input
+                id = 'login'
+                type = 'text'
+                placeholder = 'Введите логин'
+                onChange = {e => handleChange(e.target)}
+                required
+               />
              </div>
              <div>
                <label htmlFor = 'password'>Пароль</label>
-               <input id = 'password' type = 'password' placeholder = 'Введите пароль' required/>
+               <input
+                id = 'password'
+                type = 'password'
+                placeholder = 'Введите пароль'
+                required
+                onChange = {e => handleChange(e.target)}
+                />
              </div>
               <Button auth = {authStatus}>Отправить</Button>
               <CloseButton onClick = {e => {

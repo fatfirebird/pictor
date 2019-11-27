@@ -11,7 +11,6 @@ const FiltersWrapper = styled.div`
   }
 `
 
-
 const Filters = () => {
   const filters = useSelector(state => state.filters);
   const createFilters = () => Object.keys(filters).map(id => <Filter key = {id} id = {id}/>)
