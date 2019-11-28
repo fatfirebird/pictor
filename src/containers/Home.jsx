@@ -5,6 +5,7 @@ import { Container1, AuthContainer } from './PageContainer.jsx'
 import { Form } from '../components/forms.js'
 import { Button, CloseButton } from '../components/buttons.js'
 import styled from 'styled-components'
+import axios from 'axios'
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -16,11 +17,7 @@ const Home = () => {
   const authStatus = useSelector(state => state.authStatus);
   const dispatch = useDispatch()
 
-  const [userInfo, setUserInfo] = useState({
-    email: null,
-    login: null,
-    password: null
-  });
+  const [userInfo, setUserInfo] = useState(null);
 
   const handleChange = target => {
     const { value, id } = target;
@@ -33,17 +30,27 @@ const Home = () => {
 
   const handleSubmit = () => {
     const url = 'http://localhost:8000/users';
-    const {email, login, password} = userInfo;
-    console.log(userInfo);
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userInfo)
+
+    if (userInfo.hasOwnProperty('email')) {
+      return sendRequest(url, 'post', userInfo)
+    }
+
+    const params = `?login=${userInfo.login}&password=${userInfo.password}`;
+    return sendRequest(`${url}${params}`, 'get')
+  }
+
+  const sendRequest = (url, method, data) => {
+    return axios({
+      method: method,
+      url: url,
+      data,
     })
-    .then(res => res.json())
-    .then(res => {console.log(res)})
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   return(
@@ -112,7 +119,8 @@ const Home = () => {
               <Button auth = {authStatus}>Отправить</Button>
               <CloseButton onClick = {e => {
                 e.preventDefault();
-                dispatch(closeAuth())
+                setUserInfo(state => null);
+                dispatch(closeAuth());
               }}/>
          </Form>
         }
