@@ -6,6 +6,7 @@ import { ArrowButton } from '../components/buttons.js'
 import { fadeOutLeft, fadeInLeft, Animation } from '../styles/animations.js'
 import { showModal, hideModal, exit } from '../actions/index.js'
 import { useSelector, useDispatch, batch } from 'react-redux'
+import Cookies from 'js-cookie'
 
 const Navbar = styled(Animation)`
   position: absolute;
@@ -65,6 +66,7 @@ const Navigation = () => {
         <li>
           <Link icon="exit" onClick={e => {
             e.preventDefault();
+            Cookies.remove('access')
             dispatch(exit())
           }}>Выход</Link>
         </li>

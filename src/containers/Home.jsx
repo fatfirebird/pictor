@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { login, reg, closeAuth } from '../actions/index.js'
 import { Container1, AuthContainer } from './PageContainer.jsx'
@@ -6,6 +6,7 @@ import { Form } from '../components/forms.js'
 import { Button, CloseButton } from '../components/buttons.js'
 import styled from 'styled-components'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -46,12 +47,24 @@ const Home = () => {
       data,
     })
     .then(res => {
-      console.log(res);
+      console.log(res.data);
+      if (res.data.token) {
+        console.log(123);
+        return Cookies.set('acces', res.data.token, { expires: 365 });
+      }
     })
     .catch(err => {
-      console.log(err)
+      console.log(err.response);
     })
   }
+
+  useEffect(() => {
+    const token = Cookies.get('access');
+
+    if (token) {
+      console.log(token);
+    }
+  })
 
   return(
     <Container1>
