@@ -40,6 +40,11 @@ const UploadedImg = styled.img`
     max-width: 500px;
     max-height: 500px;
   }
+
+  @media (min-width: 1024px) {
+    max-width: 600px;
+    max-height: 600px;
+  }
 `
 
 const ImageContainer = () => {

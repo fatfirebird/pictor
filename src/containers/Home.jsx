@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { login, reg, closeAuth } from '../actions/index.js'
+import { login, reg, closeAuth, auth } from '../actions/index.js'
 import { Container1, AuthContainer } from './PageContainer.jsx'
 import { Form } from '../components/forms.js'
 import { Button, CloseButton } from '../components/buttons.js'
@@ -30,27 +30,19 @@ const Home = () => {
   }
 
   const handleSubmit = () => {
-    const url = 'http://localhost:8000/users';
+    const url = 'http://localhost:8000/';
 
-    if (userInfo.hasOwnProperty('email')) {
-      return sendRequest(url, 'post', userInfo)
-    }
+    if (userInfo.hasOwnProperty('email')) return sendRequest(url + 'reg', userInfo);
 
-    const params = `?login=${userInfo.login}&password=${userInfo.password}`;
-    return sendRequest(`${url}${params}`, 'get')
+    return sendRequest(url + 'log', userInfo)
   }
 
-  const sendRequest = (url, method, data) => {
-    return axios({
-      method: method,
-      url: url,
-      data,
-    })
+  const sendRequest = (url, data) => {
+    return axios.post(url, data)
     .then(res => {
-      console.log(res.data);
       if (res.data.token) {
-        console.log(123);
-        return Cookies.set('acces', res.data.token, { expires: 365 });
+        Cookies.set('access', res.data.token);
+        dispatch(auth());
       }
     })
     .catch(err => {
@@ -60,10 +52,7 @@ const Home = () => {
 
   useEffect(() => {
     const token = Cookies.get('access');
-
-    if (token) {
-      console.log(token);
-    }
+    if (token) dispatch(auth());
   })
 
   return(

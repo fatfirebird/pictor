@@ -36,6 +36,12 @@ export const exit = () => {
   }
 }
 
+export const auth = () => {
+  return {
+    type: 'AUTH'
+  }
+}
+
 export const loadImg = () => {
   return {
     type: 'LOADED'

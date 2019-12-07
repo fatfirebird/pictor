@@ -71,7 +71,7 @@ const Filter = props => {
    }
 
    const setResetValue = value => {
-     rangeRef.current.value = value
+     rangeRef.current.value = value;
    }
 
   const setBackground = value => {

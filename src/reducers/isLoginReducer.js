@@ -1,7 +1,9 @@
 const isLoginReducer = (state = false, action) => {
   switch (action.type) {
     case 'EXIT':
-      return !state;
+      return false;
+    case 'AUTH':
+      return true;
     default:
       return state;
   }

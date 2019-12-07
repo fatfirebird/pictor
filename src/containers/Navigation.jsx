@@ -58,16 +58,19 @@ const Navigation = () => {
           <Link icon="question" onClick={e => {
             e.preventDefault()
             batch(() => {
-              dispatch(hideModal('navbar'))
-              dispatch(showModal('help'))
+              dispatch(hideModal('navbar'));
+              dispatch(showModal('help'));
             })
           }}>Справка</Link>
         </li>
         <li>
           <Link icon="exit" onClick={e => {
             e.preventDefault();
-            Cookies.remove('access')
-            dispatch(exit())
+            Cookies.remove('access');
+            batch(() => {
+              dispatch(hideModal('navbar'));
+              dispatch(exit());
+            })
           }}>Выход</Link>
         </li>
       </ul>
