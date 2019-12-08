@@ -4,6 +4,7 @@ import LoadPic from '../content/load_picture.svg'
 import { useSelector, useDispatch } from 'react-redux'
 import { ColumnFlex } from './PageContainer'
 import { loadImg, imgData } from '../actions/index.js'
+import axios from 'axios'
 
 const ImageWrapper = styled(ColumnFlex)`
   width: 100%;
@@ -50,45 +51,63 @@ const ImageContainer = () => {
 
   const handleUpload = () => {
     const file = fileRef.current.files[0];
-    dispatch(loadImg())
-    if (file) {
-      return readFile(file)
-    }
+    dispatch(loadImg());
+    if (file) return readFile(file);
   }
 
   const readFile = file => {
     const reader = new FileReader();
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(file);
     reader.onload = () => {
-      dispatch(imgData(file, reader.result))
+      dispatch(imgData(file, reader.result));
     }
+    return sendImg(file);
+  }
+
+  const sendImg = file => {
+    let form = new FormData();
+    form.append('image', file);
+
+    const config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+    }
+
+    axios.post('http://localhost:8000/edit', form, config)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   const checkImg = () => {
-    if (!isLoaded) {
-      return {height: '100vh'}
-    }
+    if (!isLoaded) return {height: '100vh'}
   }
 
   return(
     <ImageWrapper style = {checkImg()}>
-     <Label>
-       {!isLoaded
-         ?
-         <div>
-          <img src = {`${LoadPic}`} width='50%' height='50%' alt='rfs'/>
-          <p>Нажмите здесь, чтобы загрузить изображение в формате jpeg или png</p>
-         </div>
-         :
-          <UploadedImg src = {url}/>
-        }
-      <input
-        type = 'file'
-        ref = {fileRef}
-        accept = '.jpg, .jpeg, .png'
-        onChange = {handleUpload}
-      />
-     </Label>
+    <form method="post" encType="multipart/form-data" onChange = {handleUpload}>
+      <Label>
+        {!isLoaded
+          ?
+          <div>
+           <img src = {`${LoadPic}`} width='50%' height='50%' alt='rfs'/>
+           <p>Нажмите здесь, чтобы загрузить изображение в формате jpeg или png</p>
+          </div>
+          :
+           <UploadedImg src = {url}/>
+         }
+       <input
+         type = 'file'
+         ref = {fileRef}
+         name = 'img'
+         accept = '.jpg, .jpeg, .png'
+       />
+      </Label>
+    </form>
     </ImageWrapper>
   )
 }
