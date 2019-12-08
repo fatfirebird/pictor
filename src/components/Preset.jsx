@@ -1,6 +1,7 @@
 import React from 'react'
 import cat from '../content/cat.jpg'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 const PresetWrapper = styled.div`
   position: relative;
@@ -10,7 +11,10 @@ const PresetWrapper = styled.div`
   &:hover,
   &:focus {
     transition: 0.3s;
+  }
 
+  & img {
+    object-fit: cover;
   }
 `
 
@@ -23,6 +27,11 @@ const PresetContainer = styled.div`
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(4, 150px);
+    grid-template-rows: repeat(2, 150px)
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(6, 150px);
     grid-template-rows: repeat(2, 150px)
   }
 `
@@ -41,39 +50,37 @@ const PresetName = styled.span`
 `
 
 const Preset = () => {
+  const url = useSelector(state => state.isImgLoaded.url);
+
   return(
     <PresetContainer>
       <PresetWrapper>
         <PresetName>будешь?</PresetName>
-        <img src={cat} width='100%' height='100%' alt='cat'/>
+        <img src={url} width='100%' height='100%' alt='cat'/>
       </PresetWrapper>
       <PresetWrapper>
         <PresetName>будешь?</PresetName>
-        <img src={cat} width='100%' height='100%' alt='cat'/>
+        <img src={url} width='100%' height='100%' alt='cat'/>
       </PresetWrapper>
       <PresetWrapper>
         <PresetName>будешь?</PresetName>
-        <img src={cat} width='100%' height='100%' alt='cat'/>
+        <img src={url} width='100%' height='100%' alt='cat'/>
       </PresetWrapper>
       <PresetWrapper>
         <PresetName>будешь?</PresetName>
-        <img src={cat} width='100%' height='100%' alt='cat'/>
+        <img src={url} width='100%' height='100%' alt='cat'/>
       </PresetWrapper>
       <PresetWrapper>
         <PresetName>будешь?</PresetName>
-        <img src={cat} width='100%' height='100%' alt='cat'/>
+        <img src={url} width='100%' height='100%' alt='cat'/>
       </PresetWrapper>
       <PresetWrapper>
         <PresetName>будешь?</PresetName>
-        <img src={cat} width='100%' height='100%' alt='cat'/>
+        <img src={url} width='100%' height='100%' alt='cat'/>
       </PresetWrapper>
       <PresetWrapper>
         <PresetName>будешь?</PresetName>
-        <img src={cat} width='100%' height='100%' alt='cat'/>
-      </PresetWrapper>
-      <PresetWrapper>
-        <PresetName>будешь?</PresetName>
-        <img src={cat} width='100%' height='100%' alt='cat'/>
+        <img src={url} width='100%' height='100%' alt='cat'/>
       </PresetWrapper>
     </PresetContainer>
   )
