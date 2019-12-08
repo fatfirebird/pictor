@@ -19,16 +19,13 @@ const EditingContainer = styled(Container1)`
 
   overflow: hidden;
   overflow-y: scroll;
-
-  @media (min-width: 1024px) {
-    grid-area: ed;
-  }
 `
 
 const Editor = () => {
   const menuReducer = useSelector(state => state.menuReducer);
-  const {isOpened, modalName} = menuReducer.modal;
-  const {menuName} = menuReducer.menu;
+  const isImgLoaded = useSelector(state => state.isImgLoaded.isLoaded);
+  const { isOpened, modalName } = menuReducer.modal;
+  const { menuName } = menuReducer.menu;
   const dispatch = useDispatch();
 
   return(
@@ -38,12 +35,17 @@ const Editor = () => {
           e.preventDefault();
           dispatch(showModal('navbar'))
         }}/>
+        {isImgLoaded
+        &&
         <DottedButton onClick = {e =>{
           e.preventDefault();
           dispatch(showModal('sideMenu'))
         }}/>
+        }
       </React.Fragment>
       <ImageContainer/>
+      {isImgLoaded
+      &&
       <EditingContainer>
         {menuName === 'filters'
         &&
@@ -54,6 +56,7 @@ const Editor = () => {
         <Preset/>
         }
       </EditingContainer>
+      }
       <React.Fragment>
         {modalName === 'navbar' &&
           <Navigation/>

@@ -5,7 +5,6 @@ import Home from './Home.jsx'
 import Cookies from 'js-cookie'
 import { useSelector } from 'react-redux'
 
-
 export default function App(){
   const isLoggedIn = useSelector(state => state.isLoggedIn);
 

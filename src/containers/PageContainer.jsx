@@ -43,14 +43,7 @@ export const MainContainer = styled.div`
   }
 
   @media (min-width: 1024px) {
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(5, 20vh);
-    grid-template-areas:
-      'pic pic pic pic pic pic pic pic'
-      'pic pic pic pic pic pic pic pic'
-      'pic pic pic pic pic pic pic pic'
-      'ed ed ed ed ed ed ed ed'
-      'ed ed ed ed ed ed ed ed'
+    grid-template: 400px calc(100vh - 400px) / 100vw;
   }
 `
 

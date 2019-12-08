@@ -18,10 +18,6 @@ const ImageWrapper = styled(ColumnFlex)`
     margin: 20px 0 0 0;
     padding: 0 50px;
   }
-
-  @media (min-width: 1024px) {
-    grid-area: pic;
-  }
 `
 
 const Label = styled.label`
@@ -37,19 +33,19 @@ const UploadedImg = styled.img`
   max-height: 300px;
 
   @media (min-width: 768px) {
-    max-width: 500px;
-    max-height: 500px;
+    max-width: 700px;
+    max-height: 400px;
   }
 
   @media (min-width: 1024px) {
-    max-width: 600px;
-    max-height: 600px;
+    max-width: 900px;
+    max-height: 300px;
   }
 `
 
 const ImageContainer = () => {
   const isImgLoaded = useSelector(state => state.isImgLoaded);
-  const { isLoaded, file, url } = isImgLoaded
+  const { isLoaded, file, url } = isImgLoaded;
   const fileRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -61,7 +57,7 @@ const ImageContainer = () => {
     }
   }
 
-  const readFile = (file) => {
+  const readFile = file => {
     const reader = new FileReader();
     reader.readAsDataURL(file)
     reader.onload = () => {
@@ -69,26 +65,32 @@ const ImageContainer = () => {
     }
   }
 
+  const checkImg = () => {
+    if (!isLoaded) {
+      return {height: '100vh'}
+    }
+  }
+
   return(
-      <ImageWrapper>
-       <Label>
-         {!isLoaded
-           ?
-           <div>
-            <img src = {`${LoadPic}`} width='50%' height='50%' alt='rfs'/>
-            <p>Нажмите здесь, чтобы загрузить изображение в формате jpeg или png</p>
-           </div>
-           :
-            <UploadedImg src = {url}/>
-          }
-        <input
-          type = 'file'
-          ref = {fileRef}
-          accept = '.jpg, .jpeg, .png'
-          onChange = {handleUpload}
-        />
-       </Label>
-      </ImageWrapper>
+    <ImageWrapper style = {checkImg()}>
+     <Label>
+       {!isLoaded
+         ?
+         <div>
+          <img src = {`${LoadPic}`} width='50%' height='50%' alt='rfs'/>
+          <p>Нажмите здесь, чтобы загрузить изображение в формате jpeg или png</p>
+         </div>
+         :
+          <UploadedImg src = {url}/>
+        }
+      <input
+        type = 'file'
+        ref = {fileRef}
+        accept = '.jpg, .jpeg, .png'
+        onChange = {handleUpload}
+      />
+     </Label>
+    </ImageWrapper>
   )
 }
 
