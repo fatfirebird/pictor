@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import EditorWrapper from './EditorWrapper.jsx'
 import Home from './Home.jsx'
-import Cookies from 'js-cookie'
 import { useSelector } from 'react-redux'
 
 export default function App(){

@@ -4,7 +4,6 @@ import LoadPic from '../content/load_picture.svg'
 import { useSelector, useDispatch } from 'react-redux'
 import { ColumnFlex } from './PageContainer'
 import { loadImg, imgData } from '../actions/index.js'
-import cat from '../content/cat.jpg'
 
 const ImageWrapper = styled(ColumnFlex)`
   width: 100%;
