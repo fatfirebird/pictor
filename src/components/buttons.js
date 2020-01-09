@@ -102,27 +102,27 @@ export const BurgerButton = styled(circle)`
     content: '';
 
     position: absolute;
-    top: 8.5px;
-    left: 6.47px;
-
-    width: 22px;
-    height 17px;
+    top: -25%;
+    right: 50%;
+    transform: translate(50%, 100%);
+    width: 50%;
+    height 50%;
 
     background-image: linear-gradient(
       0deg,
       transparent 0,
-      transparent 10%,
-      #fff 10%,
-      #fff 28%,
-      transparent 28%,
-      transparent 40%,
-      #fff 40%,
-      #fff 58%,
-      transparent 58%,
+      transparent 20%,
+      #fff 20%,
+      #fff 30%,
+      transparent 30%,
+      transparent 45%,
+      #fff 45%,
+      #fff 55%,
+      transparent 55%,
       transparent 70%,
       #fff 70%,
-      #fff 88%,
-      transparent 88%,
+      #fff 80%,
+      transparent 80%,
       transparent 100%
     )
   }
@@ -137,8 +137,11 @@ export const DottedButton = styled(circle)`
     content: '•••';
 
     position: absolute;
-    top: 3px;
-    left: 5px;
+    top: -50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+    width: 100%;
+    height 100%;
 
     font-size: 24px;
     color: white;
