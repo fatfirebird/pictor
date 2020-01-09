@@ -28,7 +28,7 @@ export const TextContainer = styled(ColumnFlex)`
   width: 300px;
   border: 2px solid ${Colors.lightgrey};
   border-radius: 4px;
-  margin: 50px 0;
+  margin: 50px 0 0 0;
   padding: 10px 20px;
 
   @media (min-width: 768px) {
