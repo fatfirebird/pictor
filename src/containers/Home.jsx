@@ -14,11 +14,20 @@ const ButtonContainer = styled.div`
 
   width: 100%;
 `
+
+const ErrorBlock = styled.span`
+  display: block;
+  text-align: center;
+
+  color: #bb1414;
+`
+
 const Home = () => {
   const authStatus = useSelector(state => state.authStatus);
   const dispatch = useDispatch()
 
   const [userInfo, setUserInfo] = useState(null);
+  const [errStatus, setError] = useState(null);
 
   const handleChange = target => {
     const { value, id } = target;
@@ -27,6 +36,11 @@ const Home = () => {
       ...state,
       [id]: value,
     }));
+  }
+
+  const handleError = res => {
+    const { statusText } = res;
+    return setError(statusText);
   }
 
   const handleSubmit = () => {
@@ -45,9 +59,7 @@ const Home = () => {
         dispatch(auth());
       }
     })
-    .catch(err => {
-      console.log(err.response);
-    })
+    .catch(err => handleError(err.response))
   }
 
   useEffect(() => {
@@ -84,8 +96,14 @@ const Home = () => {
         {authStatus &&
          <Form onSubmit = {(e) => {
            e.preventDefault()
+           setError(state => null);
            handleSubmit()
          }}>
+         {errStatus &&
+           <ErrorBlock>
+             {errStatus}
+           </ErrorBlock>
+         }
              {authStatus === 'reg' &&
              <div>
                <label htmlFor = 'email'>E-mail</label>
@@ -121,6 +139,7 @@ const Home = () => {
               <Button auth = {authStatus}>Отправить</Button>
               <CloseButton onClick = {e => {
                 e.preventDefault();
+                setError(state => null);
                 setUserInfo(state => null);
                 dispatch(closeAuth());
               }}/>
