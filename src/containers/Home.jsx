@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { login, reg, closeAuth, auth } from '../actions/index.js'
-import { Container1, AuthContainer } from './PageContainer.jsx'
+import { Container1, AuthContainer, TextContainer } from './PageContainer.jsx'
 import { Form } from '../components/forms.js'
 import { Button, CloseButton } from '../components/buttons.js'
 import styled from 'styled-components'
@@ -72,10 +72,10 @@ const Home = () => {
       {!authStatus
         &&
         <div>
-          <section>
+          <TextContainer>
             <h1>О приложении</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </section>
+          </TextContainer>
         </div>
       }
       <div>

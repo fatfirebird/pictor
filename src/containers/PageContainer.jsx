@@ -21,12 +21,31 @@ export const Container1 = styled(ColumnFlex)`
     padding: 0 35px;
   }
 `
+
+export const TextContainer = styled(ColumnFlex)`
+  justify-content: space-around;
+
+  width: 300px;
+  border: 2px solid ${Colors.lightgrey};
+  border-radius: 4px;
+  margin: 50px 0;
+  padding: 10px 20px;
+
+  @media (min-width: 768px) {
+    min-width: 450px;
+  }
+
+  @media (min-width: 1024px) {
+    min-width: 550px;
+  }
+`
+
 export const AuthContainer = styled(ColumnFlex)`
   position: relative
 
   justify-content: space-around;
 
-  width: 340px;
+  width: 320px;
   min-height: 159px;
 
   border: 2px solid ${Colors.lightgrey};
