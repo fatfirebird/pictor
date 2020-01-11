@@ -4,6 +4,7 @@ import LoadPic from '../content/load_picture.svg'
 import { useSelector, useDispatch } from 'react-redux'
 import { ColumnFlex } from './PageContainer'
 import { loadImg, imgData } from '../actions/index.js'
+import Cookies from 'js-cookie'
 import axios from 'axios'
 
 const ImageWrapper = styled(ColumnFlex)`
@@ -65,15 +66,17 @@ const ImageContainer = () => {
   }
 
   const sendImg = file => {
+    const token = Cookies.get('access');
     let form = new FormData();
     form.append('image', file);
 
     const config = {
         headers: {
+          'authorization': `${token}`,
           'content-type': 'multipart/form-data'
         }
     }
-
+    
     axios.post('http://localhost:8000/edit', form, config)
     .then(res => {
       console.log(res);
@@ -94,7 +97,7 @@ const ImageContainer = () => {
         {!isLoaded
           ?
           <div>
-           <img src = {`${LoadPic}`} width='50%' height='50%' alt='rfs'/>
+           <img src = {`${LoadPic}`} width='50%' height='50%' alt='Картинка'/>
            <p>Нажмите здесь, чтобы загрузить изображение в формате jpeg или png</p>
           </div>
           :
