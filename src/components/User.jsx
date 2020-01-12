@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Colors } from '../styles/index.js'
+import Cookies from 'js-cookie'
 
 const Head = styled.header`
   display: flex;
@@ -21,9 +22,11 @@ const Login = styled.span`
 `
 
 const User = () => {
+  const login = Cookies.get('login');
+
   return(
     <Head>
-      <Login>ffb</Login>
+      <Login>{login}</Login>
     </Head>
   )
 }

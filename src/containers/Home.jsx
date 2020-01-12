@@ -65,6 +65,7 @@ const Home = () => {
       }
       if (res.data.token) {
         Cookies.set('access', res.data.token);
+        Cookies.set('login', login);
         batch(() => {
           dispatch(auth());
           dispatch(closeAuth());

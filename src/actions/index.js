@@ -38,7 +38,7 @@ export const exit = () => {
 
 export const auth = () => {
   return {
-    type: 'AUTH'
+    type: 'AUTH',
   }
 }
 
@@ -48,7 +48,7 @@ export const loadImg = () => {
   }
 }
 
-export const imgData = (url) => {
+export const imgData = url => {
   return {
     type: 'IMG_DATA',
     payload: { url }
