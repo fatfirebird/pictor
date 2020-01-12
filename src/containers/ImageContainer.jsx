@@ -53,17 +53,17 @@ const ImageContainer = () => {
   const handleUpload = () => {
     const file = fileRef.current.files[0];
     dispatch(loadImg());
-    if (file) return readFile(file);
+    if (file) return sendImg(file);
   }
 
-  const readFile = file => {
-    const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader.onload = () => {
-    //   dispatch(imgData(file, reader.result));
-    // }
-    return sendImg(file);
-  }
+  // const readFile = file => {
+  //   // const reader = new FileReader();
+  //   // reader.readAsDataURL(file);
+  //   // reader.onload = () => {
+  //   //   dispatch(imgData(file, reader.result));
+  //   // }
+  //   return sendImg(file);
+  // }
 
   const sendImg = file => {
     const token = Cookies.get('access');
@@ -79,13 +79,7 @@ const ImageContainer = () => {
 
     axios.post('http://localhost:8000/edit', form, config)
     .then(res => {
-      console.log(res.data);
-      // const reader = new FileReader();
-      // reader.readAsDataURL(res.data);
-      // reader.onload = () => {
-      //   console.log(reader.result);
-      // }
-      dispatch(imgData(res.data, res.data));
+      dispatch(imgData(res.data));
 
     })
     .catch(err => {
