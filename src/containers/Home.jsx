@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, batch } from 'react-redux'
 import { signin, reg, closeAuth, auth } from '../actions/index.js'
 import { Container1, AuthContainer, TextContainer } from './PageContainer.jsx'
 import { Form } from '../components/forms.js'
@@ -65,7 +65,10 @@ const Home = () => {
       }
       if (res.data.token) {
         Cookies.set('access', res.data.token);
-        dispatch(auth());
+        batch(() => {
+          dispatch(auth());
+          dispatch(closeAuth());
+        });
       }
     })
     .catch(err => {
