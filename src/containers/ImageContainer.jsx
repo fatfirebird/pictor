@@ -58,10 +58,10 @@ const ImageContainer = () => {
 
   const readFile = file => {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      dispatch(imgData(file, reader.result));
-    }
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   dispatch(imgData(file, reader.result));
+    // }
     return sendImg(file);
   }
 
@@ -76,10 +76,17 @@ const ImageContainer = () => {
           'content-type': 'multipart/form-data'
         }
     }
-    
+
     axios.post('http://localhost:8000/edit', form, config)
     .then(res => {
-      console.log(res);
+      console.log(res.data);
+      // const reader = new FileReader();
+      // reader.readAsDataURL(res.data);
+      // reader.onload = () => {
+      //   console.log(reader.result);
+      // }
+      dispatch(imgData(res.data, res.data));
+
     })
     .catch(err => {
       console.log(err);
