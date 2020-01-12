@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { login, reg, closeAuth, auth } from '../actions/index.js'
+import { signin, reg, closeAuth, auth } from '../actions/index.js'
 import { Container1, AuthContainer, TextContainer } from './PageContainer.jsx'
 import { Form } from '../components/forms.js'
 import { Button, CloseButton } from '../components/buttons.js'
@@ -24,13 +24,13 @@ const ErrorBlock = styled.span`
 
 const Home = () => {
   const authStatus = useSelector(state => state.authStatus);
-  const dispatch = useDispatch()
-
-  const [userInfo, setUserInfo] = useState(null);
+  const dispatch = useDispatch();
+  const user = {login: '', email: '', password: ''};
+  const [userInfo, setUserInfo] = useState(user);
   const [errStatus, setError] = useState(null);
 
-  const handleChange = target => {
-    const { value, id } = target;
+  const handleChange = event => {
+    const { value, id } = event.target;
 
     return setUserInfo(state => ({
       ...state,
@@ -45,8 +45,7 @@ const Home = () => {
 
   const handleSubmit = () => {
     const url = 'http://localhost:8000/';
-
-    if (userInfo.hasOwnProperty('email')) return sendRequest(url + 'reg', userInfo);
+    if (userInfo.hasOwnProperty('email') && userInfo.email !== '') return sendRequest(url + 'reg', userInfo);
 
     return sendRequest(url + 'log', userInfo)
   }
@@ -54,12 +53,24 @@ const Home = () => {
   const sendRequest = (url, data) => {
     return axios.post(url, data)
     .then(res => {
+      const { login, password } = data;
+      if (res.data.hasOwnProperty('email')) {
+         setUserInfo(state => ({
+           email: '',
+           login,
+           password,
+         }));
+         dispatch(signin());
+         return null
+      }
       if (res.data.token) {
         Cookies.set('access', res.data.token);
         dispatch(auth());
       }
     })
-    .catch(err => handleError(err.response))
+    .catch(err => {
+      handleError(err.response)
+    })
   }
 
   useEffect(() => {
@@ -87,7 +98,7 @@ const Home = () => {
         </h2>
         <ButtonContainer>
           <Button onClick = {() => {dispatch(reg())}}>Регистрация</Button>
-          <Button type = 'login' onClick = {() => {dispatch(login())}}>Вход в систему</Button>
+          <Button type = 'login' onClick = {() => {dispatch(signin())}}>Вход в систему</Button>
         </ButtonContainer>
       </AuthContainer>
       :
@@ -111,7 +122,8 @@ const Home = () => {
                 id = 'email'
                 type = 'email'
                 placeholder = 'Введите email'
-                onChange = {e => handleChange(e.target)}
+                value = {userInfo.email}
+                onChange = {handleChange}
                 required
                />
              </div>
@@ -122,7 +134,8 @@ const Home = () => {
                 id = 'login'
                 type = 'text'
                 placeholder = 'Введите логин'
-                onChange = {e => handleChange(e.target)}
+                onChange = {handleChange}
+                value = {userInfo.login}
                 required
                />
              </div>
@@ -132,15 +145,16 @@ const Home = () => {
                 id = 'password'
                 type = 'password'
                 placeholder = 'Введите пароль'
+                onChange = {handleChange}
+                value = {userInfo.password}
                 required
-                onChange = {e => handleChange(e.target)}
                 />
              </div>
               <Button auth = {authStatus}>Отправить</Button>
               <CloseButton onClick = {e => {
                 e.preventDefault();
                 setError(state => null);
-                setUserInfo(state => null);
+                setUserInfo(state => user);
                 dispatch(closeAuth());
               }}/>
          </Form>
