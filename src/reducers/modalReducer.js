@@ -16,9 +16,8 @@ const openModalReducer = (state = initialState, action) => {
     case 'HIDE_MODAL': {
       const { modal } = action.payload;
       return {
-        ...state,
         isOpened: false,
-        modalName: modal
+        modalName: null
       }
     }
     default:

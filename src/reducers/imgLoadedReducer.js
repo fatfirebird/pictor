@@ -18,6 +18,9 @@ const isImgLoaded = (state = initialState, action) => {
         url
       }
     }
+    case 'UNLOAD': {
+      return initialState;
+    }
     default:
       return state;
   }

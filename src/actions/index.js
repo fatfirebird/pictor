@@ -55,6 +55,12 @@ export const imgData = (url) => {
   }
 }
 
+export const imgUnload = () => {
+  return {
+    type: 'UNLOAD'
+  }
+}
+
 export const openMenu = menuName => {
   return {
     type: 'OPEN_MENU',

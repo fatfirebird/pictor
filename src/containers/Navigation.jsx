@@ -4,7 +4,7 @@ import User from  '../components/User.jsx'
 import { Link } from '../components/Link.jsx'
 import { ArrowButton } from '../components/buttons.js'
 import { fadeOutLeft, fadeInLeft, Animation } from '../styles/animations.js'
-import { showModal, hideModal, exit } from '../actions/index.js'
+import { showModal, hideModal, exit, imgUnload } from '../actions/index.js'
 import { useSelector, useDispatch, batch } from 'react-redux'
 import Cookies from 'js-cookie'
 
@@ -36,6 +36,7 @@ const Navbar = styled(Animation)`
 
 const Navigation = () => {
   const modal = useSelector(state => state.menuReducer.modal);
+  const imgUrl = useSelector(state => state.isImgLoaded.url);
   const isModalOpened = modal.isOpened;
   const dispatch = useDispatch();
 
@@ -70,6 +71,7 @@ const Navigation = () => {
             batch(() => {
               dispatch(hideModal('navbar'));
               dispatch(exit());
+              if (imgUrl) dispatch(imgUnload());
             })
           }}>Выход</Link>
         </li>

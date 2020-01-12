@@ -46,7 +46,7 @@ const UploadedImg = styled.img`
 
 const ImageContainer = () => {
   const isImgLoaded = useSelector(state => state.isImgLoaded);
-  const { isLoaded, file, url } = isImgLoaded;
+  const { isLoaded, url } = isImgLoaded;
   const fileRef = useRef(null);
   const dispatch = useDispatch();
 
