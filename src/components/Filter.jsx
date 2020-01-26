@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { changeFilterValue } from '../actions/index.js'
+import { changeFilterValue, imgData } from '../actions/index.js'
+import axios from 'axios'
 
 const FilterWrapper = styled.div`
   display: flex;
@@ -55,6 +56,7 @@ const Range = styled.input`
 
 const Filter = props => {
   const filter = useSelector(state => state.filters[props.id]);
+  const fileName = useSelector(state => state.isImgLoaded.fileName);
   const rangeRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -68,6 +70,25 @@ const Filter = props => {
   const handleChange = () => {
      const refValue = rangeRef.current.value;
      dispatch(changeFilterValue(name, refValue, id))
+     return setChange()
+   }
+
+   const setChange = () => {
+     const url = 'http://localhost:8000/edit';
+     const params = {
+       fileName,
+       filters: {
+         blue: 100
+       }
+     };
+     axios.post(url, {params})
+     .then(res => {
+       const { dataUrl, fileName } = res.data;
+       dispatch(imgData(dataUrl, fileName));
+     })
+     .catch(err => {
+       console.log(err);
+     })
    }
 
    const setResetValue = value => {

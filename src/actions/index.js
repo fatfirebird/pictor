@@ -48,10 +48,13 @@ export const loadImg = () => {
   }
 }
 
-export const imgData = url => {
+export const imgData = (url, fileName) => {
   return {
     type: 'IMG_DATA',
-    payload: { url }
+    payload: {
+      url,
+      fileName
+    }
   }
 }
 

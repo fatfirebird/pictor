@@ -10,7 +10,6 @@ import Filters from './Filters.jsx'
 import ImageContainer from './ImageContainer.jsx'
 import Preset from '../components/Preset.jsx'
 import Info from './Info.jsx'
-import Cookies from 'js-cookie'
 
 const EditingContainer = styled(Container1)`
   display: block;

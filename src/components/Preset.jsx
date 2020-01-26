@@ -1,5 +1,4 @@
 import React from 'react'
-import cat from '../content/cat.jpg'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 

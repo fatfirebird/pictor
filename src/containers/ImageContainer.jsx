@@ -77,10 +77,10 @@ const ImageContainer = () => {
         }
     }
 
-    axios.post('http://localhost:8000/edit', form, config)
+    axios.post('http://localhost:8000/upload', form, config)
     .then(res => {
-      dispatch(imgData(res.data));
-
+      const { dataUrl, fileName } = res.data;
+      dispatch(imgData(dataUrl, fileName));
     })
     .catch(err => {
       console.log(err);

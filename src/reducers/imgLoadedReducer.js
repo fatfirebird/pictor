@@ -1,4 +1,5 @@
 const initialState = {
+  fileName: null,
   isLoaded: false,
   url: null
 }
@@ -12,9 +13,10 @@ const isImgLoaded = (state = initialState, action) => {
       }
     }
     case 'IMG_DATA': {
-      const { url } = action.payload;
+      const { url, fileName } = action.payload;
       return {
         ...state,
+        fileName,
         url
       }
     }
