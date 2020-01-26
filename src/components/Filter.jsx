@@ -60,7 +60,7 @@ const Filter = props => {
   const rangeRef = useRef(null);
   const dispatch = useDispatch();
 
-  const { name, value, id } = filter
+  const { name, value, id, desc, min, max, step } = filter
 
   useEffect(() => {
     setBackground(value)
@@ -69,16 +69,17 @@ const Filter = props => {
 
   const handleChange = () => {
      const refValue = rangeRef.current.value;
-     dispatch(changeFilterValue(name, refValue, id))
-     return setChange()
+     dispatch(changeFilterValue(refValue, id))
+     return setChange(name, refValue)
    }
 
-   const setChange = () => {
+   const setChange = (name, refValue) => {
+     console.log(name);
      const url = 'http://localhost:8000/edit';
      const params = {
        fileName,
        filters: {
-         blue: 100
+         [name]: refValue
        }
      };
      axios.post(url, {params})
@@ -101,12 +102,12 @@ const Filter = props => {
 
   return(
     <FilterWrapper>
-      <Label>{name}</Label>
+      <Label>{desc}</Label>
       <Range
         type = 'range'
-        min = '0'
-        max = '1'
-        step = '0.1'
+        min = {min}
+        max = {max}
+        step = {step}
         defaultValue = {value}
         ref = {rangeRef}
         style = {{background: setBackground(value)}}

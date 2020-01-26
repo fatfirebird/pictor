@@ -71,11 +71,10 @@ export const openMenu = menuName => {
   }
 }
 
-export const changeFilterValue = (filterName, filterValue, filterId) => {
+export const changeFilterValue = (filterValue, filterId) => {
   return {
     type: 'CHANGE_VALUE',
     payload: {
-      filterName,
       filterValue,
       filterId,
     }
