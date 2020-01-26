@@ -87,3 +87,10 @@ export const resetFilters = () => {
     type: 'RESET',
   }
 }
+
+export const fetchFilters = filters => {
+  return {
+    type: 'FETCH_FILTERS',
+    payload: filters
+  }
+}

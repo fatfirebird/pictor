@@ -13,7 +13,7 @@ const filtersReducer = (state = initialState, action) => {
     case 'CHANGE_VALUE': {
       const { filterName, filterValue, filterId } = action.payload;
       const key = Object.keys(state).find(id => id === filterId);
-      
+
       return {
         ...state,
         [key]: {
@@ -25,6 +25,20 @@ const filtersReducer = (state = initialState, action) => {
     }
     case 'RESET' :
       return initialState
+
+    case 'FETCH_FILTERS': {
+      const filter  = action.payload;
+      const filterId = filter._id;
+        return {
+          ...state,
+          [filterId]: {
+            name: filter.name.filter_name,
+            value: filter.values.default,
+            id: filterId
+          }
+        }
+    }
+
     default:
       return state;
   }

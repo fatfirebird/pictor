@@ -101,7 +101,7 @@ const Filter = props => {
 
   return(
     <FilterWrapper>
-      <Label>Фильтрнейм</Label>
+      <Label>{name}</Label>
       <Range
         type = 'range'
         min = '0'
