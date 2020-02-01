@@ -55,18 +55,23 @@ const CloseButton = styled(closeButton)`
 
 const SideMenu = () => {
   const menuReducer = useSelector(state => state.menuReducer.menu);
-  const {menuName}  = menuReducer
+  const isImgLoaded = useSelector(state => state.isImgLoaded);
+  const { url, fileName } = isImgLoaded;
+  const { menuName }  = menuReducer;
   const dispatch = useDispatch();
 
   return(
     <Menu>
       <ul>
+      {fileName
+        &&
         <li>
-          <Link>Сохранить изображение</Link>
+          <Link
+            href = {url}
+            download = {fileName}
+          >Сохранить изображение</Link>
         </li>
-        <li>
-          <Link>Отменить изменения</Link>
-        </li>
+      }
         <li>
         {
           menuName === 'filters'
@@ -84,16 +89,13 @@ const SideMenu = () => {
         }
         </li>
         <li>
-          <Link>Ввод текста</Link>
-        </li>
-        <li>
           <Link onClick={e => {
             e.preventDefault()
             batch(() => {
               dispatch(resetFilters())
               dispatch(openMenu(menuName))
             })
-          }} >Сбросить фильтры</Link>
+          }}>Отменить изменения</Link>
         </li>
       </ul>
       <CloseButton onClick={e => {
