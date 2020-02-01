@@ -108,7 +108,7 @@ const Filter = props => {
         defaultValue = {value}
         ref = {rangeRef}
         onChange = {handleChange}
-        disabled = {false}
+        disabled = {props.disabled}
       />
     </FilterWrapper>
   )

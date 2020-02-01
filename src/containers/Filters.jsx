@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Filter from '../components/Filter.jsx'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchFilters, imgData, setImgLoading } from '../actions/index.js'
+import { fetchFilters, imgData, editing, loadImg } from '../actions/index.js'
 import styled from 'styled-components'
 import axios from 'axios'
 
@@ -17,10 +17,12 @@ const Filters = () => {
   const filters = useSelector(state => state.filters);
   const dispatch = useDispatch();
   const fileName = useSelector(state => state.isImgLoaded.fileName);
+  const disabled = useSelector(state => state.isImgLoaded.disabled);
 
   useEffect(() => {
     // setResetValue(filter.value);
     // dispatch(setImgLoading());
+    dispatch(editing())
     setChange()
     // console.log(filter.value);
   }, [filters])
@@ -38,11 +40,11 @@ const Filters = () => {
     })
     .catch(err => {
       console.log(err);
+      dispatch(loadImg())
     })
   }
 
-
-  const createFilters = () => Object.keys(filters).map(id => <Filter key = {id} id = {id}/>);
+  const createFilters = () => Object.keys(filters).map(id => <Filter key = {id} id = {id} disabled = {disabled}/>);
 
   return(
     <FiltersWrapper>

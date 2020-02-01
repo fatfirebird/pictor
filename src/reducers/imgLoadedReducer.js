@@ -2,7 +2,8 @@ const initialState = {
   fileName: null,
   isLoaded: false,
   isLoading: false,
-  url: null
+  url: null,
+  disabled: false,
 }
 
 const isImgLoaded = (state = initialState, action) => {
@@ -12,20 +13,27 @@ const isImgLoaded = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isLoaded: true,
+        disabled: false,
       }
     }
 
     case 'LOADING': {
-        return {
+      return {
           ...initialState,
           isLoading: true,
         }
     }
-
+    case 'EDITING': {
+      return {
+        ...state,
+        disabled: true
+      }
+    }
     case 'IMG_DATA': {
       const { url, fileName } = action.payload;
       return {
         ...state,
+        disabled: false,
         fileName,
         url
       }

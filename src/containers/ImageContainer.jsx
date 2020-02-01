@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import styled from 'styled-components'
 import LoadPic from '../content/load_picture.svg'
 import { LoadingPicture } from '../components/loadingPicture.jsx'
+import { EditingPicture } from '../components/editingPicture.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { ColumnFlex } from './PageContainer'
 import { loadImg, imgData, setImgLoading } from '../actions/index.js'
@@ -30,24 +31,9 @@ const Label = styled.label`
   }
 `
 
-const UploadedImg = styled.img`
-  max-width: 300px;
-  max-height: 300px;
-
-  @media (min-width: 768px) {
-    max-width: 700px;
-    max-height: 400px;
-  }
-
-  @media (min-width: 1024px) {
-    max-width: 900px;
-    max-height: 300px;
-  }
-`
-
 const ImageContainer = () => {
   const isImgLoaded = useSelector(state => state.isImgLoaded);
-  const { isLoaded, url, isLoading } = isImgLoaded;
+  const { isLoaded, url, isLoading, disabled } = isImgLoaded;
   const fileRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -101,7 +87,7 @@ const ImageContainer = () => {
           ?
           <LoadingPicture isLoading = {isLoading} />
           :
-           <UploadedImg src = {url}/>
+          <EditingPicture url = {url} disabled = {disabled}/>
          }
        <input
          type = 'file'

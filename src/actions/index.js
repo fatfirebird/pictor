@@ -99,3 +99,9 @@ export const setImgLoading = () => {
     type: 'LOADING'
   }
 }
+
+export const editing = () => {
+  return {
+    type: 'EDITING'
+  }
+}
