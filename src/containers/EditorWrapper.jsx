@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MainContainer, Container1 } from './PageContainer.jsx'
 import Navigation from './Navigation.jsx'
 import {  useSelector, useDispatch } from 'react-redux'
-import { showModal } from '../actions/index.js'
+import { showModal, fetchFilters } from '../actions/index.js'
 import { BurgerButton, DottedButton } from '../components/buttons.js'
 import SideMenu from './SideMenu.jsx'
 import styled from 'styled-components'
@@ -10,6 +10,7 @@ import Filters from './Filters.jsx'
 import ImageContainer from './ImageContainer.jsx'
 import Preset from '../components/Preset.jsx'
 import Info from './Info.jsx'
+import axios from 'axios'
 
 const EditingContainer = styled(Container1)`
   display: block;
@@ -23,10 +24,28 @@ const EditingContainer = styled(Container1)`
 
 const Editor = () => {
   const menuReducer = useSelector(state => state.menuReducer);
-  const isImgLoaded = useSelector(state => state.isImgLoaded.isLoaded);
+  const isImgLoaded = useSelector(state => state.isImgLoaded);
+  const { isLoaded, isLoading } = isImgLoaded;
   const { isOpened, modalName } = menuReducer.modal;
   const { menuName } = menuReducer.menu;
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchFilter = async () => {
+      const url = 'http://localhost:8000/data/filters.json';
+      await axios.get(url)
+      .then(res => {
+        const fetchedFilters = res.data.filters;
+        for (const filter of fetchedFilters) {
+          dispatch(fetchFilters(filter))
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+    fetchFilter();
+  }, [])
 
   return(
     <MainContainer>
@@ -44,7 +63,7 @@ const Editor = () => {
         }
       </React.Fragment>
       <ImageContainer/>
-      {isImgLoaded
+      {isLoaded
       &&
       <EditingContainer>
         {menuName === 'filters'

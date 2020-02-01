@@ -93,3 +93,9 @@ export const fetchFilters = filters => {
     payload: filters
   }
 }
+
+export const setImgLoading = () => {
+  return {
+    type: 'LOADING'
+  }
+}

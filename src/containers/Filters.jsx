@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Filter from '../components/Filter.jsx'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchFilters } from '../actions/index.js'
+import { fetchFilters, imgData, setImgLoading } from '../actions/index.js'
 import styled from 'styled-components'
 import axios from 'axios'
 
@@ -15,25 +15,32 @@ const FiltersWrapper = styled.div`
 
 const Filters = () => {
   const filters = useSelector(state => state.filters);
-
   const dispatch = useDispatch();
+  const fileName = useSelector(state => state.isImgLoaded.fileName);
 
   useEffect(() => {
-    const fetchFilter = async () => {
-      const url = 'http://localhost:8000/data/filters.json';
-      await axios.get(url)
-      .then(res => {
-        const fetchedFilters = res.data.filters;
-        for (const filter of fetchedFilters) {
-          dispatch(fetchFilters(filter))
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    }
-    fetchFilter();
-  }, [])
+    // setResetValue(filter.value);
+    // dispatch(setImgLoading());
+    setChange()
+    // console.log(filter.value);
+  }, [filters])
+
+  const setChange = async (name, refValue) => {
+    const url = 'http://localhost:8000/edit';
+    const params = {
+      fileName,
+      filters,
+    };
+    axios.post(url, {params})
+    .then(res => {
+      const { dataUrl, fileName } = res.data;
+      dispatch(imgData(dataUrl, fileName));
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
 
   const createFilters = () => Object.keys(filters).map(id => <Filter key = {id} id = {id}/>);
 

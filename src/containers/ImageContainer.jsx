@@ -1,9 +1,10 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
 import LoadPic from '../content/load_picture.svg'
+import { LoadingPicture } from '../components/loadingPicture.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { ColumnFlex } from './PageContainer'
-import { loadImg, imgData } from '../actions/index.js'
+import { loadImg, imgData, setImgLoading } from '../actions/index.js'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 
@@ -46,13 +47,13 @@ const UploadedImg = styled.img`
 
 const ImageContainer = () => {
   const isImgLoaded = useSelector(state => state.isImgLoaded);
-  const { isLoaded, url } = isImgLoaded;
+  const { isLoaded, url, isLoading } = isImgLoaded;
   const fileRef = useRef(null);
   const dispatch = useDispatch();
 
   const handleUpload = () => {
     const file = fileRef.current.files[0];
-    dispatch(loadImg());
+    dispatch(setImgLoading());
     if (file) return sendImg(file);
   }
 
@@ -80,6 +81,7 @@ const ImageContainer = () => {
     axios.post('http://localhost:8000/upload', form, config)
     .then(res => {
       const { dataUrl, fileName } = res.data;
+      dispatch(loadImg());
       dispatch(imgData(dataUrl, fileName));
     })
     .catch(err => {
@@ -97,10 +99,7 @@ const ImageContainer = () => {
       <Label>
         {!isLoaded
           ?
-          <div>
-           <img src = {`${LoadPic}`} width='50%' height='50%' alt='Картинка'/>
-           <p>Нажмите здесь, чтобы загрузить изображение в формате jpeg или png</p>
-          </div>
+          <LoadingPicture isLoading = {isLoading} />
           :
            <UploadedImg src = {url}/>
          }

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { changeFilterValue, imgData } from '../actions/index.js'
+import { changeFilterValue, imgData, setImgLoading } from '../actions/index.js'
 import axios from 'axios'
 
 const FilterWrapper = styled.div`
@@ -37,6 +37,7 @@ const Range = styled.input`
     margin: 10px 0;
 
     border-radius: 5px;
+    background: #939393;
   }
 
   &:focus {
@@ -55,50 +56,46 @@ const Range = styled.input`
 `
 
 const Filter = props => {
-  const filter = useSelector(state => state.filters[props.id]);
+  const filters = useSelector(state => state.filters);
+  // const filter = useSelector(state => state.filters[props.id]);
+  const filter = filters[props.id]
   const fileName = useSelector(state => state.isImgLoaded.fileName);
   const rangeRef = useRef(null);
   const dispatch = useDispatch();
 
   const { name, value, id, desc, min, max, step } = filter
 
-  useEffect(() => {
-    setBackground(value)
-    setResetValue(value)
-  })
+  // useEffect(() => {
+  //   setResetValue(filter.value);
+  //   // dispatch(setImgLoading());
+  //   setChange()
+  //   console.log(filter.value);
+  // }, [filter.value])
 
   const handleChange = () => {
      const refValue = rangeRef.current.value;
      dispatch(changeFilterValue(refValue, id))
-     return setChange(name, refValue)
    }
 
-   const setChange = (name, refValue) => {
-     console.log(name);
-     const url = 'http://localhost:8000/edit';
-     const params = {
-       fileName,
-       filters: {
-         [name]: refValue
-       }
-     };
-     axios.post(url, {params})
-     .then(res => {
-       const { dataUrl, fileName } = res.data;
-       dispatch(imgData(dataUrl, fileName));
-     })
-     .catch(err => {
-       console.log(err);
-     })
-   }
+   // const setChange = async (name, refValue) => {
+   //   const url = 'http://localhost:8000/edit';
+   //   const params = {
+   //     fileName,
+   //     filters,
+   //   };
+   //   axios.post(url, {params})
+   //   .then(res => {
+   //     const { dataUrl, fileName } = res.data;
+   //     dispatch(imgData(dataUrl, fileName));
+   //   })
+   //   .catch(err => {
+   //     console.log(err);
+   //   })
+   // }
 
-   const setResetValue = value => {
-     rangeRef.current.value = value;
-   }
-
-  const setBackground = value => {
-    return `linear-gradient(90deg, #3F51B5 ${value * 100}%, #939393 ${value * 100}%)`
-  }
+   // const setResetValue = value => {
+   //   rangeRef.current.value = value;
+   // }
 
   return(
     <FilterWrapper>
@@ -110,8 +107,8 @@ const Filter = props => {
         step = {step}
         defaultValue = {value}
         ref = {rangeRef}
-        style = {{background: setBackground(value)}}
         onChange = {handleChange}
+        disabled = {false}
       />
     </FilterWrapper>
   )
