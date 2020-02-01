@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
 
 const PresetWrapper = styled.div`
   position: relative;
@@ -17,24 +16,6 @@ const PresetWrapper = styled.div`
   }
 `
 
-const PresetContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 150px);
-  grid-template-rows: repeat(4, 150px);
-  justify-content: center;
-  grid-gap: 25px;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(4, 150px);
-    grid-template-rows: repeat(2, 150px)
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(6, 150px);
-    grid-template-rows: repeat(2, 150px)
-  }
-`
-
 const PresetName = styled.span`
   position: absolute;
   bottom: 0px;
@@ -48,41 +29,13 @@ const PresetName = styled.span`
   transform: translateX(-50%);
 `
 
-const Preset = () => {
-  const url = useSelector(state => state.isImgLoaded.url);
-
+export const Preset = props => {
   return(
-    <PresetContainer>
-      <PresetWrapper>
-        <PresetName>будешь?</PresetName>
-        <img src={url} width='100%' height='100%' alt='cat'/>
-      </PresetWrapper>
-      <PresetWrapper>
-        <PresetName>будешь?</PresetName>
-        <img src={url} width='100%' height='100%' alt='cat'/>
-      </PresetWrapper>
-      <PresetWrapper>
-        <PresetName>будешь?</PresetName>
-        <img src={url} width='100%' height='100%' alt='cat'/>
-      </PresetWrapper>
-      <PresetWrapper>
-        <PresetName>будешь?</PresetName>
-        <img src={url} width='100%' height='100%' alt='cat'/>
-      </PresetWrapper>
-      <PresetWrapper>
-        <PresetName>будешь?</PresetName>
-        <img src={url} width='100%' height='100%' alt='cat'/>
-      </PresetWrapper>
-      <PresetWrapper>
-        <PresetName>будешь?</PresetName>
-        <img src={url} width='100%' height='100%' alt='cat'/>
-      </PresetWrapper>
-      <PresetWrapper>
-        <PresetName>будешь?</PresetName>
-        <img src={url} width='100%' height='100%' alt='cat'/>
-      </PresetWrapper>
-    </PresetContainer>
+    <PresetWrapper>
+      <PresetName>
+      {props.desc}
+      </PresetName>
+      <img src={props.url} width='100%' height='100%' alt='cat'/>
+    </PresetWrapper>
   )
 }
-
-export default Preset

@@ -25,7 +25,7 @@ const Filters = () => {
     dispatch(editing())
     setChange()
     // console.log(filter.value);
-  }, [filters])
+  }, [filters]);
 
   const setChange = async (name, refValue) => {
     const url = 'http://localhost:8000/edit';

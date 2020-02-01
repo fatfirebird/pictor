@@ -8,7 +8,7 @@ import SideMenu from './SideMenu.jsx'
 import styled from 'styled-components'
 import Filters from './Filters.jsx'
 import ImageContainer from './ImageContainer.jsx'
-import Preset from '../components/Preset.jsx'
+import Presets from './Presets.jsx'
 import Info from './Info.jsx'
 import axios from 'axios'
 
@@ -72,7 +72,7 @@ const Editor = () => {
         }
         {menuName === 'presets'
         &&
-        <Preset/>
+        <Presets/>
         }
       </EditingContainer>
       }

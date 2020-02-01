@@ -105,3 +105,22 @@ export const editing = () => {
     type: 'EDITING'
   }
 }
+
+export const monochrome = () => {
+  return {
+    type: 'MONOCHROME'
+  }
+}
+
+export const negative = () => {
+  return {
+    type: 'NEGATIVE'
+  }
+}
+
+export const noise = type => {
+  return {
+    type: 'NOISE',
+    payload: type
+  }
+}

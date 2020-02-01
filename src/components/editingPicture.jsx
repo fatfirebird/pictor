@@ -18,7 +18,6 @@ const UploadedImg = styled.img`
 `
 
 export const EditingPicture = props => {
-  console.log(props.disabled);
   return(
     <React.Fragment>
     {!props.disabled
