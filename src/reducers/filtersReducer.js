@@ -5,7 +5,7 @@ const initialState = {
     desc: 'Синий',
     step: 1,
     min: 0,
-    max: 255,
+    max: 100,
     value: 0
   },
   '2': {
@@ -14,7 +14,7 @@ const initialState = {
     desc: 'Красный',
     step: 1,
     min: 0,
-    max: 255,
+    max: 100,
     value: 0
   },
   '3': {
@@ -23,7 +23,7 @@ const initialState = {
     desc: 'Зеленый',
     step: 1,
     min: 0,
-    max: 255,
+    max: 100,
     value: 0
   },
   '4': {
