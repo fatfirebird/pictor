@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
-import LoadPic from '../content/load_picture.svg'
 import { LoadingPicture } from '../components/loadingPicture.jsx'
 import { EditingPicture } from '../components/editingPicture.jsx'
 import { useSelector, useDispatch } from 'react-redux'

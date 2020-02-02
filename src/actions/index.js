@@ -118,3 +118,9 @@ export const resetPresets = () => {
     type: 'RESET_PRESETS'
   }
 }
+
+export const setConnection = () => {
+  return {
+    type: 'CONNECTION'
+  }
+}

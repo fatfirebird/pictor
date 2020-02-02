@@ -4,6 +4,8 @@ const authorizationReducer = (state = false, action) => {
       return state = 'login'
     case 'REGISTARTION':
       return state = 'reg'
+    case 'CONNECTION':
+      return state = 'loading'
     case 'CLOSE':
       return !state;
     default:

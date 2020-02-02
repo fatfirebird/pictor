@@ -25,7 +25,7 @@ const EditingContainer = styled(Container1)`
 const Editor = () => {
   const menuReducer = useSelector(state => state.menuReducer);
   const isImgLoaded = useSelector(state => state.isImgLoaded);
-  const { isLoaded, isLoading } = isImgLoaded;
+  const { isLoaded } = isImgLoaded;
   const { isOpened, modalName } = menuReducer.modal;
   const { menuName } = menuReducer.menu;
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const Editor = () => {
       })
     }
     fetchFilter();
-  }, [])
+  }, [dispatch])
 
   return(
     <MainContainer>
