@@ -27,6 +27,7 @@ const Presets = () => {
   const isImgLoaded = useSelector(state => state.isImgLoaded);
   const { url, fileName } = isImgLoaded;
   const presets = useSelector(state => state.presets);
+  const filters = useSelector(state => state.filters);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,7 +35,8 @@ const Presets = () => {
       const url = 'http://localhost:8000/edit';
       const params = {
         fileName,
-        filters: presets,
+        filters,
+        presets
       };
 
       axios.post(url, {params})
@@ -50,7 +52,7 @@ const Presets = () => {
 
     dispatch(editing());
     setChange()
-  }, [presets])
+  }, [presets, filters, fileName, dispatch])
 
   const createPresets = () =>
     Object

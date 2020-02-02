@@ -15,9 +15,11 @@ const FiltersWrapper = styled.div`
 
 const Filters = () => {
   const filters = useSelector(state => state.filters);
+  const presets = useSelector(state => state.presets);
   const dispatch = useDispatch();
   const fileName = useSelector(state => state.isImgLoaded.fileName);
   const disabled = useSelector(state => state.isImgLoaded.disabled);
+
 
   useEffect(() => {
     const setChange = async () => {
@@ -25,6 +27,7 @@ const Filters = () => {
       const params = {
         fileName,
         filters,
+        presets
       };
 
       axios.post(url, {params})

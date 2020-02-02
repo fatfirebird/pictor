@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { setPresetValue } from '../actions/index.js'
@@ -33,7 +33,6 @@ const PresetName = styled.span`
 
 export const Preset = props => {
   const dispatch = useDispatch();
-  const presetRef = useRef();
 
   const handleChange = () => {
     dispatch(setPresetValue(props.index))
@@ -45,7 +44,7 @@ export const Preset = props => {
       onClick = {handleChange}
     >
       <PresetName>
-        {props.desc}
+      {props.desc}
       </PresetName>
       <img src={props.url} width='100%' height='100%' alt='cat'/>
     </PresetWrapper>
