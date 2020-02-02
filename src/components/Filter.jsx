@@ -1,8 +1,7 @@
-import React, { useRef, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useRef } from 'react'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { changeFilterValue, imgData, setImgLoading } from '../actions/index.js'
-import axios from 'axios'
+import { changeFilterValue } from '../actions/index.js'
 
 const FilterWrapper = styled.div`
   display: flex;
@@ -56,42 +55,13 @@ const Range = styled.input`
 `
 
 const Filter = props => {
-  const filters = useSelector(state => state.filters);
-  // const filter = useSelector(state => state.filters[props.id]);
-  const filter = filters[props.id]
-  const fileName = useSelector(state => state.isImgLoaded.fileName);
   const rangeRef = useRef(null);
   const dispatch = useDispatch();
 
-  const { name, value, id, desc, min, max, step } = filter
-
-  // useEffect(() => {
-  //   setResetValue(filter.value);
-  //   // dispatch(setImgLoading());
-  //   setChange()
-  //   console.log(filter.value);
-  // }, [filter.value])
-
   const handleChange = () => {
      const refValue = rangeRef.current.value;
-     dispatch(changeFilterValue(refValue, id))
+     dispatch(changeFilterValue(refValue, props.index))
    }
-
-   // const setChange = async (name, refValue) => {
-   //   const url = 'http://localhost:8000/edit';
-   //   const params = {
-   //     fileName,
-   //     filters,
-   //   };
-   //   axios.post(url, {params})
-   //   .then(res => {
-   //     const { dataUrl, fileName } = res.data;
-   //     dispatch(imgData(dataUrl, fileName));
-   //   })
-   //   .catch(err => {
-   //     console.log(err);
-   //   })
-   // }
 
    // const setResetValue = value => {
    //   rangeRef.current.value = value;
@@ -99,13 +69,13 @@ const Filter = props => {
 
   return(
     <FilterWrapper>
-      <Label>{desc}</Label>
+      <Label>{props.desc}</Label>
       <Range
         type = 'range'
-        min = {min}
-        max = {max}
-        step = {step}
-        defaultValue = {value}
+        min = {props.min}
+        max = {props.max}
+        step = {props.step}
+        defaultValue = {props.defaultValue}
         ref = {rangeRef}
         onChange = {handleChange}
         disabled = {props.disabled}

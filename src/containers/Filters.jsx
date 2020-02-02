@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Filter from '../components/Filter.jsx'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchFilters, imgData, editing, loadImg } from '../actions/index.js'
+import { imgData, editing, loadImg } from '../actions/index.js'
 import styled from 'styled-components'
 import axios from 'axios'
 
@@ -20,31 +20,44 @@ const Filters = () => {
   const disabled = useSelector(state => state.isImgLoaded.disabled);
 
   useEffect(() => {
-    // setResetValue(filter.value);
-    // dispatch(setImgLoading());
-    dispatch(editing())
-    setChange()
-    // console.log(filter.value);
-  }, [filters]);
+    const setChange = async () => {
+      const url = 'http://localhost:8000/edit';
+      const params = {
+        fileName,
+        filters,
+      };
 
-  const setChange = async (name, refValue) => {
-    const url = 'http://localhost:8000/edit';
-    const params = {
-      fileName,
-      filters,
-    };
-    axios.post(url, {params})
-    .then(res => {
-      const { dataUrl, fileName } = res.data;
-      dispatch(imgData(dataUrl, fileName));
-    })
-    .catch(err => {
-      console.log(err);
-      dispatch(loadImg())
-    })
-  }
+      axios.post(url, {params})
+      .then(res => {
+        const { dataUrl, fileName } = res.data;
+        dispatch(imgData(dataUrl, fileName));
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(loadImg())
+      })
+    }
 
-  const createFilters = () => Object.keys(filters).map(id => <Filter key = {id} id = {id} disabled = {disabled}/>);
+    dispatch(editing());
+    setChange();
+  }, [filters, dispatch, fileName]);
+
+  const createFilters = () =>
+    Object
+    .keys(filters)
+    .map(id =>
+      <Filter
+        key = {id}
+        index = {+id}
+        id = {filters[id].name}
+        disabled = {disabled}
+        min = {filters[id].min}
+        max = {filters[id].max}
+        step = {filters[id].step}
+        defaultValue = {filters[id].value}
+        desc = {filters[id].desc}
+      />
+    );
 
   return(
     <FiltersWrapper>
