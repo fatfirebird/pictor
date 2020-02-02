@@ -25,6 +25,11 @@ const presetsReducer = (state = initialState, action) => {
         }
       }
     }
+
+    case 'RESET_PRESETS': {
+      return initialState
+    }
+
     default:
       return state
   }

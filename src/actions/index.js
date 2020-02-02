@@ -112,3 +112,9 @@ export const setPresetValue = (presetId) => {
     payload: presetId
   }
 }
+
+export const resetPresets = () => {
+  return {
+    type: 'RESET_PRESETS'
+  }
+}

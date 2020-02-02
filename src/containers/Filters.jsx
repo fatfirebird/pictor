@@ -43,7 +43,7 @@ const Filters = () => {
 
     dispatch(editing());
     setChange();
-  }, [filters, dispatch, fileName]);
+  }, [filters, presets, dispatch, fileName]);
 
   const createFilters = () =>
     Object

@@ -20,7 +20,6 @@ const isImgLoaded = (state = initialState, action) => {
       return {
         ...state,
         isLoaded: false,
-        isLoading: true,
       }
     }
     case 'LOADING': {

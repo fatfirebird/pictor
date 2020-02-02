@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Link as link }  from '../components/Link.jsx'
 import { CloseButton as closeButton } from '../components/buttons.js'
 import { useSelector, useDispatch, batch } from 'react-redux'
-import { hideModal, openMenu, resetFilters } from '../actions/index.js'
+import { hideModal, openMenu, resetFilters, resetPresets } from '../actions/index.js'
 
 const Menu = styled(Side)`
   background-color: rgba(0, 0, 0, 0.85);
@@ -77,14 +77,14 @@ const SideMenu = () => {
           menuName === 'filters'
           &&
           <Link onClick={e => {
-            e.preventDefault()
-            dispatch(openMenu('presets'))
+            e.preventDefault();
+            dispatch(openMenu('presets'));
           }}>Готовые пресеты</Link>
         }
         { menuName === 'presets' &&
           <Link onClick={e => {
-            e.preventDefault()
-            dispatch(openMenu('filters'))
+            e.preventDefault();
+            dispatch(openMenu('filters'));
           }}>Фильтры</Link>
         }
         </li>
@@ -92,15 +92,16 @@ const SideMenu = () => {
           <Link onClick={e => {
             e.preventDefault()
             batch(() => {
-              dispatch(resetFilters())
-              dispatch(openMenu(menuName))
+              dispatch(resetFilters());
+              dispatch(resetPresets());
+              dispatch(openMenu(menuName));
             })
           }}>Отменить изменения</Link>
         </li>
       </ul>
       <CloseButton onClick={e => {
-        e.preventDefault()
-        dispatch(hideModal('sideMenu'))
+        e.preventDefault();
+        dispatch(hideModal('sideMenu'));
       }}/>
     </Menu>
   )
