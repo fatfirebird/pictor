@@ -106,21 +106,9 @@ export const editing = () => {
   }
 }
 
-export const monochrome = () => {
+export const setPresetValue = (presetId) => {
   return {
-    type: 'MONOCHROME'
-  }
-}
-
-export const negative = () => {
-  return {
-    type: 'NEGATIVE'
-  }
-}
-
-export const noise = type => {
-  return {
-    type: 'NOISE',
-    payload: type
+    type: 'PRESET_VALUE',
+    payload: presetId
   }
 }

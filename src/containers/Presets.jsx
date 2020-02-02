@@ -1,7 +1,9 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Preset } from '../components/preset.jsx'
+import axios from 'axios'
+import { imgData, loadImg, editing } from '../actions/index.js'
 
 const PresetContainer = styled.div`
   display: grid;
@@ -22,21 +24,46 @@ const PresetContainer = styled.div`
 `
 
 const Presets = () => {
-  const url = useSelector(state => state.isImgLoaded.url);
+  const isImgLoaded = useSelector(state => state.isImgLoaded);
+  const { url, fileName } = isImgLoaded;
   const presets = useSelector(state => state.presets);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const setChange = async () => {
+      const url = 'http://localhost:8000/edit';
+      const params = {
+        fileName,
+        filters: presets,
+      };
+
+      axios.post(url, {params})
+      .then(res => {
+        const { dataUrl, fileName } = res.data;
+        dispatch(imgData(dataUrl, fileName));
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(loadImg())
+      })
+    }
+
+    dispatch(editing());
+    setChange()
+  }, [presets])
 
   const createPresets = () =>
-  Object
-  .keys(presets)
-  .map(id =>
-    <Preset
-      key = {id}
-      url = {url}
-      name = {presets[id].name}
-      desc = {presets[id].desc}
-      value = {presets[id].value}
-    />
-  );
+    Object
+      .keys(presets)
+      .map(id =>
+        <Preset
+          key = {id}
+          index = {+id}
+          url = {url}
+          name = {presets[id].name}
+          desc = {presets[id].desc}
+        />
+      );
 
   return(
     <PresetContainer>

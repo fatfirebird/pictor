@@ -16,7 +16,13 @@ const isImgLoaded = (state = initialState, action) => {
         disabled: false,
       }
     }
-
+    case 'UNLOAD': {
+      return {
+        ...state,
+        isLoaded: false,
+        isLoading: true,
+      }
+    }
     case 'LOADING': {
       return {
           ...initialState,
@@ -37,9 +43,6 @@ const isImgLoaded = (state = initialState, action) => {
         fileName,
         url
       }
-    }
-    case 'UNLOAD': {
-      return initialState;
     }
     default:
       return state;
