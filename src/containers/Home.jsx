@@ -6,11 +6,11 @@ import { About } from '../components/about.jsx'
 import { Authorization } from '../components/authorization.jsx'
 import { AuthForm } from './AuthForm.jsx'
 import { Loader } from '../components/loader.jsx'
-
 import Cookies from 'js-cookie'
 
 const Home = () => {
-  const authStatus = useSelector(state => state.authStatus);
+  const authStatus = useSelector(state => state.authStatus.status);
+  const loader = useSelector(state => state.authStatus.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,21 +35,22 @@ const Home = () => {
       }
       <div>
         {
-          authStatus === 'loading'
+          !authStatus
           ?
-          <Loader />
+          <Authorization
+            authStatus = {authStatus}
+            registration = {registration}
+            authorization = {authorization}
+          />
           :
           <React.Fragment>
+            <AuthForm authStatus = {authStatus} authLoading = {loader} />
             {
-              !authStatus
-              ?
-              <Authorization
-                authStatus = {authStatus}
-                registration = {registration}
-                authorization = {authorization}
-              />
-              :
-              <AuthForm authStatus = {authStatus} />
+              loader
+              &&
+              <div style = {{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
+                <Loader />
+              </div>
             }
           </React.Fragment>
         }

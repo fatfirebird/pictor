@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, batch } from 'react-redux'
-import { setConnection, auth, closeAuth, signin } from '../actions/index.js'
+import { setConnection, reg, auth, closeAuth, signin } from '../actions/index.js'
 import { AuthContainer } from './PageContainer.jsx'
 import { Form } from '../components/forms.js'
 import { AuthTitle } from '../components/authTitle.jsx'
@@ -50,6 +50,7 @@ export const AuthForm = props => {
       if (res.data.token) {
         Cookies.set('access', res.data.token);
         Cookies.set('login', login);
+
         batch(() => {
           dispatch(auth());
           dispatch(closeAuth());
@@ -57,12 +58,26 @@ export const AuthForm = props => {
       }
     })
     .catch(err => {
-      handleError(err.response)
+      const response = err.response;
+      const status = response.data.status;
+
+      if (status === 401) {
+        dispatch(reg());
+      } else if (status === 403) {
+        dispatch(signin());
+      }
+      handleError(response);
+
     })
   }
 
+  let display = 'flex';
+  if (props.authLoading) {
+    display = 'none';
+  }
+
   return(
-    <AuthContainer>
+    <AuthContainer style = {{display: `${display}`}}>
       <AuthTitle authStatus = {props.authStatus} />
       {
         props.authStatus
