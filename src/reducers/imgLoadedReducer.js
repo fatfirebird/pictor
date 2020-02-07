@@ -18,8 +18,7 @@ const isImgLoaded = (state = initialState, action) => {
     }
     case 'UNLOAD': {
       return {
-        ...state,
-        isLoaded: false,
+        initialState,
       }
     }
     case 'LOADING': {

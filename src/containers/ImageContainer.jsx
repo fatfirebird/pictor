@@ -4,7 +4,7 @@ import { LoadingPicture } from '../components/loadingPicture.jsx'
 import { EditingPicture } from '../components/editingPicture.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { ColumnFlex } from './PageContainer'
-import { loadImg, imgData, setImgLoading } from '../actions/index.js'
+import { loadImg, imgData, setImgLoading, imgUnload } from '../actions/index.js'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 
@@ -70,7 +70,7 @@ const ImageContainer = () => {
       dispatch(imgData(dataUrl, fileName));
     })
     .catch(err => {
-      console.log(err);
+      dispatch(imgUnload());
     })
   }
 
