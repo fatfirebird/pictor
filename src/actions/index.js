@@ -87,13 +87,6 @@ export const resetFilters = () => {
   }
 }
 
-export const fetchFilters = filters => {
-  return {
-    type: 'FETCH_FILTERS',
-    payload: filters
-  }
-}
-
 export const setImgLoading = () => {
   return {
     type: 'LOADING'

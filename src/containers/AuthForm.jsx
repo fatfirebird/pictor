@@ -34,8 +34,11 @@ export const AuthForm = props => {
     const url = 'http://localhost:8000/';
     dispatch(setConnection());
 
-    if (userInfo.hasOwnProperty('email') && userInfo.email !== '')
+    if (userInfo.hasOwnProperty('email') && userInfo.email !== '') {
+      console.log(userInfo.email);
+
       return sendRequest(url + 'reg', userInfo);
+    }
 
     return sendRequest(url + 'log', userInfo)
   }
@@ -46,6 +49,7 @@ export const AuthForm = props => {
       const { login } = data;
       if (res.data.hasOwnProperty('email')) {
          dispatch(signin());
+         setUserInfo(state => user);
       }
       if (res.data.token) {
         Cookies.set('access', res.data.token);
@@ -67,7 +71,6 @@ export const AuthForm = props => {
         dispatch(signin());
       }
       handleError(response);
-
     })
   }
 

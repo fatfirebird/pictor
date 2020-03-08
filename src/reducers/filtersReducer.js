@@ -337,26 +337,6 @@ const filtersReducer = (state = initialState, action) => {
        return initialState
     }
 
-    case 'FETCH_FILTERS': {
-      const filter  = action.payload;
-      const filterId = filter._id;
-      const { min, max, step } = filter.values;
-      const { filter_name, description } = filter.name;
-
-      return {
-          ...state,
-          [filterId]: {
-            id: filterId,
-            name: filter_name,
-            desc: description,
-            step,
-            min,
-            max,
-            value: filter.values.default,
-          }
-        }
-    }
-
     default:
       return state;
   }
