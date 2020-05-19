@@ -63,7 +63,7 @@ const ImageContainer = () => {
         }
     }
 
-    axios.post('http://localhost:8000/upload', form, config)
+    axios.post('/upload', form, config)
     .then(res => {
       const { dataUrl, fileName } = res.data;
       dispatch(loadImg());

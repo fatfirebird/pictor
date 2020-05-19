@@ -23,7 +23,7 @@ const Filters = () => {
 
   useEffect(() => {
     const setChange = async () => {
-      const url = 'http://localhost:8000/edit';
+      const url = '/edit';
       const params = {
         fileName,
         filters,

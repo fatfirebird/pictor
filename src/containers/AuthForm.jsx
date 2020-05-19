@@ -31,16 +31,15 @@ export const AuthForm = props => {
   }
 
   const handleSubmit = () => {
-    const url = 'http://localhost:8000/';
     dispatch(setConnection());
 
     if (userInfo.hasOwnProperty('email') && userInfo.email !== '') {
       console.log(userInfo.email);
 
-      return sendRequest(url + 'reg', userInfo);
+      return sendRequest('/reg', userInfo);
     }
 
-    return sendRequest(url + 'log', userInfo)
+    return sendRequest('/log', userInfo);
   }
 
   const sendRequest = (url, data) => {
